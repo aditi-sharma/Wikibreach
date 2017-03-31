@@ -1,10 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
-from django.contrib.auth.decorators import login_required
-from googleapiclient.discovery import build
-from oauth2client.contrib.django_util.decorators import oauth_required
 import pypwned
-
+from oauth2client.contrib.django_util import decorators
+import base64
+import json
 # Create your views here.
 
 
@@ -12,16 +11,18 @@ import pypwned
 # def home(request):
 #     return render(request, "home.html")
 
+snippet = []
+@decorators.oauth_required
+def get_profile_required(request):
+    resp, messages = request.oauth.http.request('https://www.googleapis.com/gmail/v1/users/wikibreach2017@gmail.com/messages')
+    json_data = json.loads(messages)
+    data = json_data['messages']
+    for message in data:
+        id = message['id']
+        resp1, content = request.oauth.http.request('https://www.googleapis.com/gmail/v1/users/wikibreach2017@gmail.com/messages/' + id)
+        message_data = json.loads(content)
+        payload = message_data['payload']
+        parts = payload['parts']
 
-# def index(request):
-#     return HttpResponse(pypwned.getAllBreachesForAccount(email="aditisharma.b@gmail.com"))
-
-
-@oauth_required(return_url="oauth2/")
-def get_alerts(request):
-    service = build(serviceName='gmail', version='v1',
-                    http=request.oauth.http,
-                    developerKey='AIzaSyAg1waT7IavLA2BhfKTwjvqeUbb9A0F7Z8')
-    results = service.users().messages().list(userId='me').execute()['items']
-    messages = results.get('messages', [])
-    return HttpResponse('Message snippet: %s' % messages)
+        # snippet.append(base64.b64decode(data2))
+        return HttpResponse(body)

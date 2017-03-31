@@ -1,4 +1,6 @@
 from django.db import models
+from oauth2client.contrib.django_util.models import CredentialsField
+from django.contrib.auth.models import User
 
 # Create your models here.
 class PrivacyRightsRecord(models.Model):
@@ -34,3 +36,6 @@ class PrivacyRightsRecord(models.Model):
 class meta:
     ordering = ['date_made_public']
 
+class CredentialsModel(models.Model):
+    user_id = models.OneToOneField(User)
+    credential = CredentialsField()

@@ -17,13 +17,17 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views
 from pwnedCheck.forms import LoginForm
-from oauth2client.contrib.django_util.site import urls as oauth2_urls
+from django.conf import urls
+import oauth2client.contrib.django_util.site as django_util_site
+from pwnedCheck import views as view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^pwnedCheck/', include('pwnedCheck.urls')),
+  #  url(r'^$', views.index),
+    url(r'^getAlerts', view.get_profile_required),
+  #  url(r'^pwnedCheck/', include('pwnedCheck.urls')),
     url(r'^login/$', views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}, name='login'),
     url(r'^logout/$', views.logout, {'template_name': 'logout.html'}, name='logout'),
-    url(r'^oauth2/', include(oauth2_urls))
+    url(r'^oauth2/', urls.include(django_util_site.urls)),
 
 ]

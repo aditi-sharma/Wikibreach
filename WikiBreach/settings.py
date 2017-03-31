@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sessions.middleware',
-    'oauth2client.contrib.django_util',
+    'oauth2client.contrib.django_util'
 ]
 
 MIDDLEWARE = [
@@ -59,7 +59,14 @@ MIDDLEWARE = [
 
 GOOGLE_OAUTH2_CLIENT_SECRETS_JSON = 'WikiBreach/client_secret.json'
 
-GOOGLE_OAUTH2_SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
+GOOGLE_OAUTH2_SCOPES = ('https://www.googleapis.com/auth/gmail.readonly',)
+
+GOOGLE_OAUTH2_STORAGE_MODEL = {
+    'model' : 'pwnedCheck.models.CredentialsModel',
+    'user_property': 'user_id',
+    'credentials_property': 'credential',
+}
+
 
 ROOT_URLCONF = 'WikiBreach.urls'
 
