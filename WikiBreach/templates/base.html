@@ -108,9 +108,10 @@
       color: #fff;
   }
   .navbar {
-      margin-bottom: 0;
+      position: absolute;
+      margin-bottom: 10px;
       background-color: #000;
-      z-index: 1;
+      z-index: 0;
       border: 0;
       font-size: 12px !important;
       line-height: 3 !important;
@@ -123,7 +124,7 @@
   .logo {
   position: absolute;
   // Use your own values for anything below this line.
-  z-index: 2;
+  z-index: 2000;
   left: 35px;
   top: 5px;
   width: 300px;
@@ -194,7 +195,7 @@
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
-<a class="logo" href="#myPage"> <img src="{% static '/images/logo.png' %}" width="300" height="70"></a>
+
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -213,6 +214,7 @@
     </div>
   </div>
 </nav>
+<a class="logo" href="#myPage"> <img src="{% static '/images/logo.png' %}" width="300" height="70"></a>
 
 <div class="jumbotron text-center">
   <h1>Company</h1>
