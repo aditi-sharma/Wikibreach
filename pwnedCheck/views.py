@@ -7,9 +7,9 @@ import json
 # Create your views here.
 
 
-# @login_required(login_url="login/")
-# def home(request):
-#     return render(request, "home.html")
+
+def home(request):
+    return render(request, "base.html")
 
 snippet = []
 @decorators.oauth_required
@@ -25,4 +25,4 @@ def get_profile_required(request):
         parts = payload['parts']
 
         # snippet.append(base64.b64decode(data2))
-        return HttpResponse(body)
+       # return HttpResponse(body)

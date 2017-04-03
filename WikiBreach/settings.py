@@ -136,4 +136,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
+PROJECT_PATH = os.path.join(os.path.dirname(__file__),os.pardir)
+PROJECT_PATH = os.path.abspath(PROJECT_PATH)
+
 STATIC_URL = '/static/'
+
+STATIC_PATH = os.path.join(PROJECT_PATH, 'WikiBreach/static')
+
+STATICFILES_DIRS = [
+    # "/Users/Aditi/CapstoneProject/WikiBreach/WikiBreach/static",
+    STATIC_PATH,
+]

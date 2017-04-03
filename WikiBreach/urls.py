@@ -23,7 +23,7 @@ from pwnedCheck import views as view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-  #  url(r'^$', views.index),
+    url(r'^$', view.home, name='home'),
     url(r'^getAlerts', view.get_profile_required),
   #  url(r'^pwnedCheck/', include('pwnedCheck.urls')),
     url(r'^login/$', views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}, name='login'),
