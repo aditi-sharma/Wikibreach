@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<html lang="en">
+<head>
+<style>
+    td {
+    padding-top: .5em;
+    padding-bottom: .5em;
+    padding: 5px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+ <body>
+<div class="container">
+    <form class="form-inline"> {% csrf_token %}
+    <table border="1" width="100%">
+        {% with count=0 %}
+        {% for key,value in messages.items %}
+        <tr>
+            <td> {{ value.0 }}
+            <br/>
+                <a href= {{ value.1 }} target="_blank"> View full news </a>
+                <button type="button"  id ="delete_{{forloop.counter0|add:count}}" value={{key}} class="btn btn-danger btn-sm pull-right">Delete</button>
+                <button type="button" id ="accept" class="btn btn-success btn-sm pull-right">Accept</button>
+                <script type ="text/javascript">
+     $('[id^=delete]').click(function(e) {
+        // do NOT submit the form as a regular POST request
+        e.preventDefault();
+        message_id = $(this).attr('value');
+        $.ajax({
+            type: 'POST',
+            url: '/getAlerts/',
+            data: {'id': message_id},
+            success: function() {
+                alert('Message deleted!')},
+            fail : function() {
+                alert('Unable to delete the message. Please reload page and try again!')
+            },
+            headers: { 'X-METHODOVERRIDE': 'DELETE' },
+            error : function(xhr,errmsg,err) {
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+        });
+     });
+
+    function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+   }
+   var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+   $(document).ajaxSend(function(event, xhr, settings){
+    if (!csrfSafeMethod(settings.type)) {
+        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+
+    }
+});
+
+</script>
+            </td>
+        </tr>
+        {% endfor %}
+        {% endwith %}
+    </table>
+    </form>
+</div>
+  {% endblock %}
+</body>      </html>

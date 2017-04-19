@@ -23,8 +23,9 @@ from pwnedCheck import views as view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', view.home, name='home'),
+    # url(r'^$', view.home, name='home'),
     url(r'^getAlerts', view.get_profile_required),
+    # url(r'^deleteMessage', view.deleteMessage())
   #  url(r'^pwnedCheck/', include('pwnedCheck.urls')),
     url(r'^login/$', views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}, name='login'),
     url(r'^logout/$', views.logout, {'template_name': 'logout.html'}, name='logout'),

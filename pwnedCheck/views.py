@@ -1,9 +1,17 @@
 from django.shortcuts import render
-from django.shortcuts import HttpResponse
-import pypwned
+from django.http import QueryDict
+import html2text
 from oauth2client.contrib.django_util import decorators
+from django.views.decorators.csrf import csrf_protect
 import base64
 import json
+import requests
+from bs4 import BeautifulSoup
+from apiclient import discovery
+from apiclient import errors
+from httplib2 import Http
+from oauth2client import file, client, tools
+import email
 # Create your views here.
 
 
@@ -11,18 +19,43 @@ import json
 def home(request):
     return render(request, "base.html")
 
-snippet = []
+data = {}
 @decorators.oauth_required
+@csrf_protect
 def get_profile_required(request):
-    resp, messages = request.oauth.http.request('https://www.googleapis.com/gmail/v1/users/wikibreach2017@gmail.com/messages')
-    json_data = json.loads(messages)
-    data = json_data['messages']
-    for message in data:
-        id = message['id']
-        resp1, content = request.oauth.http.request('https://www.googleapis.com/gmail/v1/users/wikibreach2017@gmail.com/messages/' + id)
-        message_data = json.loads(content)
-        payload = message_data['payload']
-        parts = payload['parts']
+    if request.method == 'POST':
+        id = QueryDict(request.body).get('id')
+        url = 'https://www.googleapis.com/gmail/v1/users/wikibreach2017@gmail.com/messages' + id
+        requests.delete(url)
+        return render(request,'home.html',{'url':url})
+    else:
+        try:
+            store = file.Storage('WikiBreach/gmail.json')
+            creds = store.get()
+            if not creds or creds.invalid:
+                flow = client.flow_from_clientsecrets('WikiBreach/client_secret.json', 'https://www.googleapis.com/auth/gmail.readonly')
+                creds = tools.run_flow(flow, store)
+            GMAIL = discovery.build('gmail', 'v1', http=creds.authorize(Http()))
+            response = GMAIL.users().messages().list(userId='wikibreach2017@gmail.com').execute()
+            data2 = response['messages']
+            for message in data2:
+                alert = []
+                id = message['id']
+                message_body = GMAIL.users().messages().get(userId='wikibreach2017@gmail.com',id=id,format='raw').execute()
+                msg_snippet = message_body['snippet']
+                msg_snippet_split = msg_snippet.split("⋅")
+                alert.append(str(msg_snippet_split[1]))
+                msg_str = base64.urlsafe_b64decode(message_body['raw'].encode('UTF-8'))
+                mime_msg = email.message_from_bytes(msg_str)
+                for part in mime_msg.walk():
+                    if part.get_content_type() == 'text/plain':
+                        msg = part.get_payload(decode=True)
+                        msg_link = str(msg).split("<")[1].split(">")[0]
+                        alert.append(msg_link)
+                        data['id']= alert
+            return render(request, 'curation.html', {'messages': data})
 
-        # snippet.append(base64.b64decode(data2))
-       # return HttpResponse(body)
+        except errors.HttpError as error:
+            print('An error occurred: %s' % error)
+
+
