@@ -18,7 +18,7 @@
     <table border="1" width="100%">
         {% with count=0 %}
         {% for key,value in messages.items %}
-        <tr>
+        <tr id={{key}}>
             <td> {{ value.0 }}
             <br/>
                 <a href= {{ value.1 }} target="_blank"> View full news </a>
@@ -34,15 +34,17 @@
             url: '/getAlerts/',
             data: {'id': message_id},
             success: function() {
-                alert('Message deleted!')},
+                alert('Message deleted!' + message_id)
+                $('#'+message_id).remove();
+             },
             fail : function() {
                 alert('Unable to delete the message. Please reload page and try again!')
             },
-            headers: { 'X-METHODOVERRIDE': 'DELETE' },
             error : function(xhr,errmsg,err) {
+            alert('Unable to delete the message. Please reload page and try again!')
             console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
         }
-        });
+                });
      });
 
     function getCookie(name) {
