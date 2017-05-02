@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+  .panel > .panel-heading {
+    background-image: none;
+    background-color: white;
+    border-color: #feb22f;
+    color: black;
+}
+
+  .panel > .panel-body {
+    background-image: none;
+    background-color: white;
+    border-color: #feb22f;
+    color: black;
+}
+ .panel {
+    background-image: none;
+    border-color: #feb22f;
+}
+
+  legend{
+	color:black;
+	font-size:25px;
+	font-weight:bold;
+}
+</style>
+
+<form action="{% url 'publishPost' %}" method="post" role="form" id="createPostForm">
+  {% csrf_token %}
+  <div class="container">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <legend><span class="glyphicon glyphicon-pencil"> </span>  New Data Breach Post </legend>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label for="title">Title of the Post:</label>
+          <textarea  class="form-control" rows="1" name="title" form="createPostForm" autofocus>{{title}} </textarea>
+          <label for="content">Content of the Post: </label>
+          <textarea class="form-control" rows="8" name="content" form="createPostForm" >{{description}} </textarea>
+          <label for="dateOfbreach">Date of the breach:</label> <br/>
+          <input type="text"  class ="form-control" name="breach_date" size="20" value="{{date}}" maxlength='50' size="25">
+          <label for="sourceURL">Link to the Source:</label> <br/>
+          <textarea class="form-control" rows="3" name="source_url" form="createPostForm"> {{sourcelink}} </textarea>
+          <span><label for="tags">Tags:</label> <p style="display:inline"> *Use spaces to separate the tags, such as "java jsf primefaces" </p> </span><br/>
+          <input type="text" class ="form-control" name="tags" size="20" value="{{keyword}}" maxlength='50' size="25"> <br/>
+          <a class="btn btn-default pull-right" data-toggle="modal" href="" > Close </a>
+          <a class="btn btn-primary btn-default pull-right" data-toggle="modal" data-target="#confirm" > Publish Post</a>
+        </div>
+
+          <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <span class="glyphicon glyphicon-info-sign"></span> Are you sure you want to Publish the Post?</h4>
+                </div>
+                <div class="modal-footer">
+                  <button style="float: right;" type="button" class="btn btn-default btn-close" data-dismiss="modal">No</button>
+                  <input type="submit" class="btn btn-primary pull-right" value="Yes"/>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}
+
