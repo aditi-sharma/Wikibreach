@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+body {
+  margin: 60px;
+  background-color: #ececeb;
+}
+
+.box {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding-left: 20px;
+  padding-right: 20px;
+  z-index: 1;
+  font-size: 150%;
+  line-height: 28px;
+}
+
+.wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 30% auto 30%;
+  grid-column-gap: 45px;
+  grid-row-gap: 45px;
+  <!--grid-auto-flow: column;-->
+}
+
+
+.date-box{
+    position: relative;
+    top:0px;
+    left: 80%;
+    background-color:black !important;
+    width: 70px !important;
+    height: 60px !important;
+    z-index: 999;
+    color: white;
+    text-align: center;
+    font-size: 15px !important;
+}
+
+.c {
+  grid-row: span 10;
+}
+
+.h {
+  grid-row: span 12;
+}
+
+.j {
+  grid-row: span 15;
+}
+
+ .h2 {
+      font-size: 23px;
+      color: black;
+      font-weight: 600;
+      line-height: 35px !important;
+  }
+
+  .content {
+    margin-top: 30px !important;
+    font-size: 17px;
+    color: black;
+    font-weight: 300 !important;
+  }
+
+@media screen and (max-width: 1140px) {
+    .wrapper {
+      text-align: center;
+      grid-template-columns: 50% 50%;
+      margin: 25px 0;
+    }
+        .box {
+      font-size: 100%;
+    }
+  }
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+      text-align: center;
+      grid-template-columns: 100%;
+      margin: 25px 0;
+    }
+    .box {
+      font-size: 100%;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .wrapper {
+      text-align: center;
+      grid-template-rows: 100%;
+      grid-template-columns: 100%;
+      margin: 25px 0;
+    }
+        .box {
+      font-size: 100%;
+    }
+  }
+  </style>
+</style>
+    {% with 'jch' as list %}
+    <div class="wrapper">
+{% for post in posts %}
+        <div class="box {{ list | random}}">
+            <div class="date-box">{{post.breach_date}} </div>
+            <a href="{% url 'post' post.slug %}" class="h2">{{post.title}} </a>
+            <div class="content"> {{post.content}} </div>
+        </div>
+{% endfor %}
+   </div>
+   {% endwith %}
+
+    {% include 'paginator.html' with paginator=posts %}
+{% endblock %}

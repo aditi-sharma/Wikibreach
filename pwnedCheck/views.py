@@ -1,12 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import QueryDict
-import html2text
 from oauth2client.contrib.django_util import decorators
 from django.views.decorators.csrf import csrf_protect
 import base64
 import json
-import requests
 from bs4 import BeautifulSoup
 from apiclient import discovery
 from apiclient import errors
@@ -39,9 +37,9 @@ def get_profile_required(request):
         id = QueryDict(request.body).get('id')
         try:
             response = GMAIL.users().messages().delete(userId='wikibreach2017@gmail.com', id=id).execute()
-            return HttpResponse("Response on delete of"+ id + response)
-        except errors.HttpError as error:
-            print('An error occurred: %s' % error)
+            return HttpResponse("Response on delete of" + id + response)
+        except errors.HttpError:
+            return HttpResponse("Error occured" + id + response)
     else:
         try:
             response = GMAIL.users().messages().list(userId='wikibreach2017@gmail.com').execute()
@@ -66,10 +64,9 @@ def get_profile_required(request):
         except errors.HttpError as error:
             print('An error occurred: %s' % error)
 
-
 @decorators.oauth_required
 @csrf_protect
-def view_posts(request):
+def authorize(request):
     try:
         store = file.Storage('WikiBreach/gmail.json')
         creds = store.get()
@@ -82,15 +79,28 @@ def view_posts(request):
         print('An error occurred: %s' % error)
 
     try:
-        response = GMAIL.users().messages().list(userId='wikibreach2017@gmail.com').execute()
-        data2 = response['messages']
-        for message in data2:
-            message_body = GMAIL.users().messages().get(userId='wikibreach2017@gmail.com', id=message['id'],
-                                                        format='raw').execute()
-            msg_str = base64.urlsafe_b64decode(message_body['raw'].encode('UTF-8'))
-            mime_msg = email.message_from_bytes(msg_str)
-            return render(request, 'home.html', {'part': mime_msg})
-
+        id = QueryDict(request.body).get('id')
+        message_body = GMAIL.users().messages().get(userId='wikibreach2017@gmail.com', id=id).execute()
+        data = message_body['payload']
+        msg = data['parts']
+        part = msg[1]
+        body = part['body']
+        dat = body['data']
+        msg_str = base64.urlsafe_b64decode(dat.encode('UTF-8'))
+        soup = BeautifulSoup(msg_str)
+        d = str(soup.find_all("script"))
+        m =[]
+        m = d.split("type=\"application/json\">", 1)
+        p = m[1].split("</script>]",1)
+        msg_json = str(p[0])
+        data2 = json.loads(msg_json)
+        date = data2['entity']['subtitle']
+        keyword = str(data2['entity']['title']).split("Google Alert - ")[1]
+        widgets = data2["cards"][0]
+        widgets = widgets['widgets'][0]
+        title = widgets['title']
+        description = widgets['description']
+        sendData = {"title": title, "date": date, "keyword": keyword, "description": description}
+        return HttpResponse(json.dumps(sendData))
     except errors.HttpError as error:
         print('An error occurred: %s' % error)
-

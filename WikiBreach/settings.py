@@ -37,6 +37,7 @@ ADMINS = (
 
 INSTALLED_APPS = [
     'pwnedCheck.apps.PwnedcheckConfig',
+    'posts.apps.PostsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sessions.middleware',
-    'oauth2client.contrib.django_util'
+    'oauth2client.contrib.django_util',
+
 ]
 
 MIDDLEWARE = [
@@ -74,7 +76,7 @@ ROOT_URLCONF = 'WikiBreach.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['WikiBreach/templates'],
+        'DIRS': ['WikiBreach/templates', 'WikiBreach/posts/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,5 +1,4 @@
 {% load static %}
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Theme Made By www.w3schools.com - No Copyright -->
@@ -49,7 +48,7 @@
   }
 
   .navbar {
-      position: fixed;
+      position: absolute;
       margin-bottom: 10px;
       background-color: #000;
       z-index: 2000;
@@ -64,7 +63,7 @@
   }
 
   .logo {
-      position: fixed;
+      position: absolute;
       // Use your own values for anything below this line.
       z-index: 9999;
       left: 35px;
@@ -158,7 +157,7 @@
   }
   @media screen and (max-width: 480px) {
     .logo {
-        font-size: 150px;
+        width: 50px;
     }
   }
   </style>
@@ -207,19 +206,21 @@
 </nav>
 
 <!-- Container (About Section) -->
-<div id="about" class="container-fluid">
-  <div class="row">
-    <div class="col-sm-8">
-      <h2>About Company Page</h2><br>
-      <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <br><button class="btn btn-default btn-lg">Get in Touch</button>
-    </div>
-  </div>
-</div>
-
+<!--<div id="about" class="container-fluid">-->
+  <!--<div class="row">-->
+    <!--<div class="col-sm-8">-->
+      <!--<h2>About Company Page</h2><br>-->
+      <!--<h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>-->
+      <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
+      <!--<br><button class="btn btn-default btn-lg">Get in Touch</button>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<br/> <br/>
  {% block content %}
+
 {% endblock%}
+<br/> <br/>
 <footer>
   <div class="container" align="left">
     <form class="form-inline">
