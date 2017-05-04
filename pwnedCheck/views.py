@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.http import QueryDict
 from oauth2client.contrib.django_util import decorators
 from django.views.decorators.csrf import csrf_protect
@@ -11,14 +11,24 @@ from apiclient import errors
 from httplib2 import Http
 from oauth2client import file, client, tools
 import email
+import pypwned
+
+
 # Create your views here.
 
+def getBreaches(request):
+    email = request.GET.get('account')
+    json_data = json.dumps(pypwned.getAllBreachesForAccount(email=email))
+    return HttpResponse(json_data)
 
 
-def home(request):
-    return render(request, "base.html")
+def pwnedCheck(request):
+    return render(request, 'pwnedCheck.html')
+
 
 data = {}
+
+
 @decorators.oauth_required
 @csrf_protect
 def get_profile_required(request):
@@ -46,7 +56,8 @@ def get_profile_required(request):
             data2 = response['messages']
             for message in data2:
                 alert = []
-                message_body = GMAIL.users().messages().get(userId='wikibreach2017@gmail.com',id=message['id'],format='raw').execute()
+                message_body = GMAIL.users().messages().get(userId='wikibreach2017@gmail.com', id=message['id'],
+                                                            format='raw').execute()
                 msg_snippet = message_body['snippet']
                 msg_snippet_split = msg_snippet.split("⋅")
                 alert.append(str(msg_snippet_split[1]))
@@ -63,6 +74,7 @@ def get_profile_required(request):
 
         except errors.HttpError as error:
             print('An error occurred: %s' % error)
+
 
 @decorators.oauth_required
 @csrf_protect
@@ -89,9 +101,9 @@ def authorize(request):
         msg_str = base64.urlsafe_b64decode(dat.encode('UTF-8'))
         soup = BeautifulSoup(msg_str)
         d = str(soup.find_all("script"))
-        m =[]
+        m = []
         m = d.split("type=\"application/json\">", 1)
-        p = m[1].split("</script>]",1)
+        p = m[1].split("</script>]", 1)
         msg_json = str(p[0])
         data2 = json.loads(msg_json)
         date = data2['entity']['subtitle']

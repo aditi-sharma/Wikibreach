@@ -47,7 +47,7 @@ div.inline {
  }
 
 </style>
-<a href="#" class="btn btn-danger btn-md pull-right">
+<a href="{% url 'delete' post.slug %}" class="btn btn-danger btn-md pull-right">
           <span class="glyphicon glyphicon-trash"></span> Delete Post
         </a>
 <a href="{% url 'edit' post.slug %}" class="btn btn-info btn-md pull-right">

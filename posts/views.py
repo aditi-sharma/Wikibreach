@@ -114,18 +114,18 @@ def tag(request, tag_name):
     tags = Tag.objects.filter(tag=tag_name)
     posts = []
     for tag in tags:
-            posts.append(tag.post)
+        posts.append(tag.post)
     return posts(request, posts)
 
 
-def editPost(request, slug,):
+def editPost(request, slug, ):
     tags = []
     post = get_object_or_404(Post, slug=slug)
     for tag in post.get_tags():
         tags.append(str(tag))
     tagString = " ".join(tags)
-    return render(request, 'editPost.html', {'post': post, 'tags': tagString})
-
+    date = parser.parse(str(post.breach_date)).strftime('%Y-%m-%d')
+    return render(request, 'editPost.html', {'post': post, 'tags': tagString, 'date': date})
 
 
 def updatePost(request, slug):
@@ -133,7 +133,13 @@ def updatePost(request, slug):
         post = get_object_or_404(Post, slug=slug)
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
-            # form.save()
-            return HttpResponse(form)
+            form.save()
+            return redirect('/posts/')
         else:
             return HttpResponse("Error occurred")
+
+
+def deletePost(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    post.delete()
+    return redirect('/posts/')

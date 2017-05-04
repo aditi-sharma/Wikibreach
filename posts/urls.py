@@ -13,4 +13,5 @@ urlpatterns = [
     # url(r'^tag/(?P<tag_name>.+)/$', views.tag, name='tag'),
     url(r'^edit/(?P<slug>[-\w]+)/$', views.editPost, name='edit'),
     url(r'^update/(?P<slug>[-\w]+)/$', views.updatePost, name='update'),
+    url(r'^delete/(?P<slug>[-\w]+)/$', views.deletePost, name='delete'),
 ]

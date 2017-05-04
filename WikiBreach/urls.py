@@ -25,6 +25,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^getAlerts', view.get_profile_required),
     url(r'^posts/', include('posts.urls')),
+    url(r'^pwnedCheck/', view.pwnedCheck),
+    url(r'^getBreaches/', view.getBreaches),
     url(r'^login/$', views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}, name='login'),
     url(r'^logout/$', views.logout, {'template_name': 'logout.html'}, name='logout'),
     url(r'^oauth2/', urls.include(django_util_site.urls)),
