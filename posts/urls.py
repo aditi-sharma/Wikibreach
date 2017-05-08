@@ -2,7 +2,7 @@ from django.conf.urls import url
 from posts import views
 
 urlpatterns = [
-    url(r'^$', views.posts),
+    url(r'^$', views.posts,  name='posts'),
     url(r'^createPost/(?P<id>\w+)/$', views.createPost, name='createPost'),
     url(r'^publishPost/', views.publishPost, name='publishPost'),
     url(r'^(?P<slug>[-\w]+)/$', views.post, name='post'),

@@ -16,16 +16,20 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views
-from pwnedCheck.forms import LoginForm
+from authentication.forms import LoginForm
 from django.conf import urls
 import oauth2client.contrib.django_util.site as django_util_site
 from pwnedCheck import views as view
+from authentication import views as auth_views
+from posts import views as home
 
 urlpatterns = [
+    url(r'^$', home.posts, name='home'),
+    url(r'^signup/$', auth_views.signup, name='signup'),
     url(r'^admin/', admin.site.urls),
-    url(r'^getAlerts', view.get_profile_required),
+    url(r'^getAlerts/', view.get_profile_required, name='getAlerts'),
     url(r'^posts/', include('posts.urls')),
-    url(r'^pwnedCheck/', view.pwnedCheck),
+    url(r'^pwnedCheck/', view.pwnedCheck, name='pwnedCheck'),
     url(r'^getBreaches/', view.getBreaches),
     url(r'^login/$', views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}, name='login'),
     url(r'^logout/$', views.logout, {'template_name': 'logout.html'}, name='logout'),

@@ -51,7 +51,7 @@
       position: absolute;
       margin-bottom: 10px;
       background-color: #000;
-      z-index: 2000;
+      z-index: -1;
       border: 0;
       font-size: 12px !important;
       line-height: 3 !important;
@@ -89,21 +89,22 @@
   .navbar-inverse {
       margin-bottom: 0px;
       background-color: #feb22f;
-      border: 0;
       font-size: 13px !important;
       letter-spacing: 2px;
       font-weight: bold;
-      border-radius: 0;
       font-family: Liberation, sans-serif;
       margin-top: 80px;
-      min-height: 20px;
   }
 
-    .navbar-inverse li a, .navbar-inverse .navbar-brand {
+    .navbar-inverse li a, .navbar-inverse li {
       color: #000 !important;
       margin-top: 0px;
-      padding-top:10px !important;
-      padding-bottom:10px !important;
+      padding-top:5px !important;
+      padding-bottom:5px !important;
+  }
+
+  .caret {
+    padding-top: 10px !important;
   }
 
   footer {
@@ -163,7 +164,8 @@
   </style>
 </head>
 
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<body id="myPage">
+<a class="logo" href="{% url 'posts'%}"> <img src="{% static '/images/logo.png' %}" width="300" height="70"></a>
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -173,19 +175,19 @@
         <span class="icon-bar"></span>
       </button>
     </div>
-    <a class="logo" href="#myPage"> <img src="{% static '/images/logo.png' %}" width="300" height="70"></a>
+
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#about">Home</a></li>
-        <li><a href="#services">About Us</a></li>
-        <li><a href="#portfolio">Contact Us</a></li>
+        <li><a href="{% url 'posts'%}">Home</a></li>
+        <li><a href="#aboutUs">About Us</a></li>
+        <li><a href="#contactUs">Contact Us</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
 <nav class="navbar-inverse">
-  <div class="container">
+    <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar2">
         <span class="icon-bar"></span>
@@ -195,14 +197,27 @@
     </div>
     <div class="collapse navbar-collapse navbar2" id="myNavbar2">
       <ul class="nav navbar-nav">
-        <li><a href="#pwned"> Have you been breached? Click to Find out </a></li>
+        <li><a href="{% url 'pwnedCheck' %}"> Have you been breached? Click to Find out </a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#login">Login</a></li>
-        <li><a href="#signup">Sign Up</a></li>
+        {% if request.user.is_authenticated %}
+          <li>{{request.user.username}}</li>
+          <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    {% if request.user.username == "Administrator" %}
+                    <li><a href="{% url 'getAlerts' %}">Curate Google Alerts</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'logout' %}">Log Out</a></li>
+                </ul>
+              </li>
+              {% else %}
+          <li><a href="{% url 'login' %}">Login</a></li>
+          <li><a href="{% url 'signup' %}">Sign Up</a></li>
+          {% endif %}
       </ul>
     </div>
-  </div>
+    </div>
 </nav>
 
 <!-- Container (About Section) -->

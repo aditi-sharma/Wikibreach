@@ -1,0 +1,98 @@
+__author__ = "Aditi Sharma"
+
+from django.contrib.auth.forms import AuthenticationForm
+from django import forms
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from WikiBreach.settings import ALLOWED_SIGNUP_DOMAINS
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(label="Username", max_length=30,
+                               widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'username'}))
+    password = forms.CharField(label="Password", max_length=30,
+                               widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'password'}))
+
+
+def SignupDomainValidator(value):
+    if '*' not in ALLOWED_SIGNUP_DOMAINS:
+        try:
+            domain = value[value.index("@"):]
+            if domain not in ALLOWED_SIGNUP_DOMAINS:
+                raise ValidationError('Invalid domain. Allowed domains on this network: {0}'.format(
+                    ','.join(ALLOWED_SIGNUP_DOMAINS)))  # noqa: E501
+
+        except Exception:
+            raise ValidationError('Invalid domain. Allowed domains on this network: {0}'.format(
+                ','.join(ALLOWED_SIGNUP_DOMAINS)))  # noqa: E501
+
+
+def ForbiddenUsernamesValidator(value):
+    forbidden_usernames = ['admin', 'settings', 'posts', 'about', 'help',
+                           'signin', 'signup', 'signout', 'terms', 'privacy',
+                           'cookie', 'new', 'login', 'logout', 'administrator',
+                           'join', 'account', 'username', 'root', 'post',
+                           'user', 'users', 'subscribe', 'edit', 'mail', 'email',
+                           'home', 'newsletter', 'profile', 'register', 'auth',
+                           'authentication', 'config', 'delete', 'remove', 'curation',
+                           'contact', 'faq', 'log', 'registration', 'search', 'static',
+                           'setting', 'css', 'js', 'paginator', 'authorize']
+
+    if value.lower() in forbidden_usernames:
+        raise ValidationError('This is a reserved word.')
+
+
+def InvalidUsernameValidator(value):
+    if '@' in value or '+' in value or '-' in value:
+        raise ValidationError('Enter a valid username.')
+
+
+def UniqueUsernameIgnoreCaseValidator(value):
+    if User.objects.filter(username__iexact=value).exists():
+        raise ValidationError('User with this Username already exists.')
+
+
+def UniqueEmailValidator(value):
+    if User.objects.filter(email__iexact=value).exists():
+        raise ValidationError('User with this Email already exists.')
+
+
+class SignUpForm(forms.ModelForm):
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        max_length=15,
+        required=True,
+        help_text='Usernames may contain <strong>alphanumeric</strong>, <strong>_</strong> and <strong>.</strong> characters')  # noqa: E261
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        label="Confirm your password",
+        required=True)
+    email = forms.CharField(
+        widget=forms.EmailInput(attrs={'class': 'form-control'}),
+        required=True,
+        max_length=75)
+
+    class Meta:
+        model = User
+        exclude = ['last_login', 'date_joined']
+        fields = ['username', 'email', 'password', 'confirm_password', ]
+
+    def __init__(self, *args, **kwargs):
+        super(SignUpForm, self).__init__(*args, **kwargs)
+        self.fields['username'].validators.append(ForbiddenUsernamesValidator)
+        self.fields['username'].validators.append(InvalidUsernameValidator)
+        self.fields['username'].validators.append(
+            UniqueUsernameIgnoreCaseValidator)
+        self.fields['email'].validators.append(UniqueEmailValidator)
+        self.fields['email'].validators.append(SignupDomainValidator)
+
+    def clean(self):
+        super(SignUpForm, self).clean()
+        password = self.cleaned_data.get('password')
+        confirm_password = self.cleaned_data.get('confirm_password')
+        if password and password != confirm_password:
+            self._errors['password'] = self.error_class(
+                ['Passwords don\'t match'])
+        return self.cleaned_data

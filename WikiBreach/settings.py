@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sessions.middleware',
     'oauth2client.contrib.django_util',
+    'sslserver',
 
 ]
 
@@ -76,7 +77,7 @@ ROOT_URLCONF = 'WikiBreach.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['WikiBreach/templates', 'WikiBreach/posts/templates'],
+        'DIRS': ['WikiBreach/templates', 'WikiBreach/posts/templates', 'authentication/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -93,8 +94,11 @@ WSGI_APPLICATION = 'WikiBreach.wsgi.application'
 
 LOGIN_REDIRECT_URL = '/'
 
+SECURE_SSL_REDIRECT = False
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+
+ALLOWED_SIGNUP_DOMAINS = ['*']
 
 DATABASES = {
     'default': {
