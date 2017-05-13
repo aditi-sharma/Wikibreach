@@ -1,0 +1,15 @@
+
+{% if exists == True%}
+<div class="alert alert-danger alert-dismissable">
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+<p align="center"> You have already subscribed to our alerts! </div>
+{% elif error == True %}
+<div class="alert alert-danger alert-dismissable">
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+<p align="center"> An unknown error has occurred! Try again after sometime! </div>
+{% else %}
+<div class="alert alert-success alert-dismissable">
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+<p align="center"> You have now subscribed to the latest breach alerts! </div>
+{%endif%}
+{% include 'allPosts.html' with posts=posts %}

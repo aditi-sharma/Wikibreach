@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %} Search WikiBreach {% endblock %}
+
+
+{% block content %}
+
+<style>
+
+  h1 {
+    font-color: black !important;
+    text-align: center !important;
+  }
+
+  .btn{
+    border-style: solid !important;
+    border: 1px !important;
+    border-color: black !important;
+    height: 33px !important;
+      }
+
+    h2 {
+    text-align: center !important;
+    font-color: #f2f !important;
+    font-size: 25px;
+  }
+
+</style>
+
+  {% if request.user.is_authenticated %}
+
+    <h1>Search for data breaches</h1>
+
+
+  <div class="row" style="padding-top: 4em; padding-bottom: 8em;">
+    <div class="col-md-8 col-md-offset-2">
+      <form role="search" action="{% url 'search' %}" style="padding-top: 1em;">
+        <div class="input-group">
+          <input type="text" class="form-control" name="q" placeholder="Type your search keyword here">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-search"></span></button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  {% else %}
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <p align="center"> You need to login to search our repositories! </div>
+          {% include 'requireLogin.html' %}
+
+  {% endif %}
+{% endblock %}

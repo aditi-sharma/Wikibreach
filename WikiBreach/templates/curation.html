@@ -5,26 +5,50 @@
 <html lang="en">
 <head>
 <style>
-    td {
-    padding-top: .5em;
-    padding-bottom: .5em;
-    padding: 5px;
+
+table {
+  border-collapse:separate;
+  border-spacing:10px 10px;
+}​​​​​​​​​​​​​
+
+.table-hover {
+    background-color: grey;
+}
+
+td {
+   padding-bottom: 10px !important;
+   padding-top: 10px !important;
+   width: 70%;
 }
 
 .loadingmessage {
 	position: fixed;
 	left: 0px;
 	top: 0px;
-	width: 100%;
-	height: 100%;
-	z-index: 9999;
+	width: 100% !important;
+	height: 100% !important;
+	z-index: 9999 !important;
 	background: url('images/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
-	-webkit-transition: all .5s ease;
-	display:none;
+	-webkit-transition: all .5s ease;;
+	background-position: center !important;
+    background-repeat: no-repeat;
+}
+
+
+.btn {
+        margin-top: 3px !important;
+        height: 33px;
+        margin-bottom: 3px !important;
+        margin-left: 0px !important;
+
+}
+
+.nav li a:active{
+    background-color:black !important;
+    color:#feb22f !important;
 }
 
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 {% block content %}
  <body>
@@ -32,36 +56,54 @@
   <img src="{% static '/images/ajax-loader.gif' %}"/>
 </div>
 <div class="container">
-    <form class="form-inline"> {% csrf_token %}
-    <table border="1" width="100%">
-        {% with count=0 %}
-        {% for key,value in messages.items %}
-        <tr id={{key}}>
-            <td> {{ value.0 }}
-            <br/>
-                <a href= {{ value.1 }} target="_blank"> View full news </a>
-                <button type="button"  id ="delete_{{forloop.counter0|add:count}}" value={{key}} class="btn btn-danger btn-sm pull-right">Delete</button>
-                <a href="{% url 'createPost' key %}"><button type="button" id ="accept_{{forloop.counter0|add:count}}" value="Accept" class="btn btn-success btn-sm pull-right">Accept</button></>
-            </td>
-        </tr>
+    <ul class="nav nav-tabs" style="border-color: black; border:3px; border-type:solid;">
+        <li class="active"><a data-toggle="tab" href="#alerts" style="background-color:black;color:#feb22f;">Google Alerts</a></li>
+        <li><a data-toggle="tab" href="#userposts">User Submitted Posts</a></li>
+    </ul>
+  <div class="tab content">
+      <div id="alerts" class="tab-pane fade in active">
+          <form class="form-inline"> {% csrf_token %}
+              <div class="table-responsive table-bordered">
+                  <table class="table">
+                      {% with count=0 %}
+                      {% for key,value in messages.items %}
+                      <tr id={{key}}>
+                          <td> {{ value.0 }} <br/>
+                              <a href= {{ value.1 }} target="_blank"> View full news </a>
+                              <button type="button"  id ="delete_{{forloop.counter0|add:count}}" value={{key}} class="btn btn-danger btn-sm pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                              <a href="{% url 'createPost' key %}"><button type="button" id ="accept_{{forloop.counter0|add:count}}" value="Accept" class="btn btn-success btn-sm pull-right"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></a>
+                          </td>
+                      </tr>
+                      {% endfor %}
+                      {% endwith %}
+                  </table>
+              </div>
+          </form>
+      </div>
+      <div id="userposts" class="tab-pane fade">
+         <p> User submitted posts are here </p>
+      </div>
+  </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
             <script type ="text/javascript">
      $('[id^=delete]').unbind().click(function(e) {
         // do NOT submit the form as a regular POST request
         e.preventDefault();
-        $('#loadingmessage').show();
+        <!--$('#loadingmessage').show();-->
         message_id = $(this).attr('value');
         $.ajax({
             type: 'POST',
             url: '/getAlerts/',
             data: {'id': message_id},
             success: function() {
-                $('#loadingmessage').hide();
+                <!--$('#loadingmessage').hide();-->
                 alert('Message deleted!');
                 $('#'+message_id).remove();
              },
             fail : function() {
                 alert('Unable to delete the message. Please reload page and try again!');
-                $('#loadingmessage').hide();
+                <!--$('#loadingmessage').hide();-->
             },
             error : function(xhr,errmsg,err) {
             alert('Unable to delete the message. Please reload page and try again!');
@@ -69,6 +111,13 @@
         }
                 });
      });
+
+    $(window).load(function() {
+		// Animate loader off screen
+		$(".loadingmessage").fadeOut("slow");
+	});
+
+
 
     function getCookie(name) {
     var cookieValue = null;
@@ -98,25 +147,9 @@
 
     }
 });
-    function createPost(id){
 
-    }
-
-    <!--$(document).ajaxStop(function () {-->
-        <!--$('#loading').hide();-->
-    <!--});-->
-
-    <!--$(document).ajaxStart(function () {-->
-        <!--$('#loading').show();-->
-    <!--});-->
 
 </script>
-            </td>
-        </tr>
-        {% endfor %}
-        {% endwith %}
-    </table>
-    </form>
-</div>
+
   {% endblock %}
-</body>      </html>
+ </body> </html>

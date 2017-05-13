@@ -38,6 +38,7 @@ ADMINS = (
 INSTALLED_APPS = [
     'pwnedCheck.apps.PwnedcheckConfig',
     'posts.apps.PostsConfig',
+    'subscription.apps.Subscription',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -71,13 +72,12 @@ GOOGLE_OAUTH2_STORAGE_MODEL = {
     'credentials_property': 'credential',
 }
 
-
 ROOT_URLCONF = 'WikiBreach.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['WikiBreach/templates', 'WikiBreach/posts/templates', 'authentication/templates'],
+        'DIRS': ['WikiBreach/templates', 'WikiBreach/posts/templates','search/templates', 'authentication/templates', 'subscription/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

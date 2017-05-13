@@ -65,7 +65,7 @@ class Post(models.Model):
         if len(self.content) > 255:
             return '{0}...'.format(self.content[:255])
         else:
-            return self.breach_date + self.content
+            return self.title + self.content
 
     def get_summary_as_markdown(self):
         return markdown.markdown(self.get_summary(), safe_mode='escape')
@@ -95,18 +95,3 @@ class Tag(models.Model):
                 count[tag.tag] = 1
         sorted_count = sorted(count.items(), key=lambda t: t[1], reverse=True)
         return sorted_count[:20]
-
-
-class PostComment(models.Model):
-    post = models.ForeignKey(Post)
-    comment = models.CharField(max_length=500)
-    date = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User)
-
-    class Meta:
-        verbose_name = "Post Comment"
-        verbose_name_plural = "Post Comments"
-        ordering = ("date",)
-
-    def __str__(self):
-        return '{0} - {1}'.format(self.user.username, self.post.title)

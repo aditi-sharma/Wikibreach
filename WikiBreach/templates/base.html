@@ -59,7 +59,7 @@
       border-radius: 0;
       font-family: Liberation, sans-serif;
       margin-top: 35px;
-      min-height: 20px;
+      min-height: 40px;
   }
 
   .logo {
@@ -101,10 +101,22 @@
       margin-top: 0px;
       padding-top:5px !important;
       padding-bottom:5px !important;
+      margin-right: 5px;
+      margin-left: 0px;
   }
 
+   .navbar-inverse li p {
+         margin-left: 32px !important;
+   }
+
+   .glyphicon-search {
+    padding-bottom: 5px !important;
+   }
+
+
   .caret {
-    padding-top: 10px !important;
+    margin-top: 7px !important;
+    margin-left: 0px !important;
   }
 
   footer {
@@ -115,7 +127,7 @@
 
   .input-group {
     padding-right: 6px;
-    padding-left: 0px;
+    padding-left: 16px;
 }
 
   .slideanim {visibility:hidden;}
@@ -199,14 +211,16 @@
       <ul class="nav navbar-nav">
         <li><a href="{% url 'pwnedCheck' %}"> Have you been breached? Click to Find out </a></li>
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
+          <li><a class="btn btn-default" href="{% url 'search'%}"><span class="glyphicon glyphicon-search">&nbsp; Search</span></a></li>
         {% if request.user.is_authenticated %}
-          <li>{{request.user.username}}</li>
+          <li><p>{{request.user.username}}</p></li>
           <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     {% if request.user.username == "Administrator" %}
-                    <li><a href="{% url 'getAlerts' %}">Curate Google Alerts</a></li>
+                    <li><a href="{% url 'getAlerts' %}">Curate google alerts/user posts</a></li>
                     {% endif %}
                     <li><a href="{% url 'logout' %}">Log Out</a></li>
                 </ul>
@@ -238,7 +252,9 @@
 <br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/><br/> <br/>
 <footer>
   <div class="container" align="left">
-    <form class="form-inline">
+    <form class="form-inline" method="post" role="form" id="subscribeForm" action="{% url 'subscribe'%}">
+  {% csrf_token %} {{ form.errors }}
+{{ form.non_field_errors }}
       <div class="col-md-4">
         <h4> Subscribe to breach updates: </h4>
         <div class="form-group">
@@ -292,6 +308,18 @@ $(document).ready(function(){
     });
   });
 })
+
+$( "#subscribeForm" ).submit(function() {
+   elementValue = $('#email').val();
+   var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+   if(emailPattern.test(elementValue)){
+        return true;
+        }
+   else {
+        alert("You have entered an invalid email address. \n Please enter a valid email address to subscribe");
+        return false;
+   }
+});
 </script>
         {% block javascript %}
 

@@ -18,7 +18,7 @@ from posts.forms import PostForm
 from django.shortcuts import get_object_or_404, redirect, render
 
 # Create your views here.
-from posts.models import Post, PostComment, Tag
+from posts.models import Post, Tag
 
 
 def _posts(request, posts):

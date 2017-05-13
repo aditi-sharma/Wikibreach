@@ -56,10 +56,11 @@
   p {
     color: black !important;
     font-size: 15px !important;
-        padding-top: 7px !important;
+    padding-top: 7px !important;
     padding-bottom: 7px !important;
   }
 </style>
+
     {% if form.non_field_errors %}
       {% for error in form.non_field_errors %}
         <div class="alert alert-danger alert-dismissable">
@@ -99,16 +100,23 @@
       </form>
     </div>
   </div>
+        </div>
+        </div>
 
 {% endblock %}
 
 {% block javascript %}
 
 
-<script>
+<script type="text/javascript">
+{% if user.is_authenticated %}
+$(function() {
+    window.location.href="/";
+});
+{% endif %}
 {% if not user.is_authenticated %}
 $("ul.nav.navbar-nav.navbar-right").css("display","none");
 {% endif %}
 </script>
 
-{% endblock %}
+        {% endblock %}

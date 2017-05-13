@@ -65,6 +65,8 @@ body {
     font-size: 17px;
     color: black;
     font-weight: 300 !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
   }
 
 @media screen and (max-width: 1140px) {
@@ -107,7 +109,7 @@ body {
         <div class="box {{ list | random}}">
             <div class="date-box">{{post.breach_date}} </div>
             <a href="{% url 'post' post.slug %}" class="h2">{{post.title}} </a>
-            <div class="content"> {{post.content}} </div>
+            <div class="content"> {{post.content|truncatewords:100}} </div>
         </div>
 {% endfor %}
    </div>

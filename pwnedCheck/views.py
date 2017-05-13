@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.http import QueryDict
 from oauth2client.contrib.django_util import decorators
 from django.views.decorators.csrf import csrf_protect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import base64
 import json
 from bs4 import BeautifulSoup
@@ -15,6 +17,8 @@ import pypwned
 
 
 # Create your views here.
+from pwnedCheck.models import PrivacyRightsRecord
+
 
 def getBreaches(request):
     email = request.GET.get('account')
@@ -70,10 +74,18 @@ def get_profile_required(request):
                         alert.append(msg_link)
                         data[message['id']] = alert
 
-            return render(request, 'curation.html', {'messages': data})
-
         except errors.HttpError as error:
             print('An error occurred: %s' % error)
+
+        # paginator = Paginator(data.items(), 5)
+        # page = request.GET.get('page')
+        # try:
+        #     pages = paginator.page(page)
+        # except PageNotAnInteger:
+        #     pages = paginator.page(1)
+        # except EmptyPage:
+        #     pages = paginator.page(paginator.num_pages)
+        return render(request, 'curation.html', {'messages': data})
 
 
 @decorators.oauth_required
@@ -116,3 +128,10 @@ def authorize(request):
         return HttpResponse(json.dumps(sendData))
     except errors.HttpError as error:
         print('An error occurred: %s' % error)
+
+
+
+# @login_required
+# def getPrivacyRightsData(request, id):
+#     record = get_object_or_404(PrivacyRightsRecord, id=id)
+#     return render(request, 'privacy_rights_clearingHouse_post.html', {'record': record})

@@ -1,6 +1,8 @@
+import markdown
 from django.db import models
 from oauth2client.contrib.django_util.models import CredentialsField
 from django.contrib.auth.models import User
+
 
 # Create your models here.
 class PrivacyRightsRecord(models.Model):
@@ -33,8 +35,23 @@ class PrivacyRightsRecord(models.Model):
     description = models.TextField()
     info_source = models.CharField(max_length=30)
 
-class meta:
-    ordering = ['date_made_public']
+
+    class meta:
+        ordering = ['date_made_public']
+
+    def __str__(self):
+        return str(self.date_made_public + " " + self.company_name)
+
+    def get_description_as_markdown(self):
+        return markdown.markdown(self.description, safe_mode='escape')
+
+    def get_company_name(self):
+        return str(self.company_name)
+
+    def get_breach_date(self):
+        return self.date_made_public
+
+
 
 class CredentialsModel(models.Model):
     user_id = models.OneToOneField(User)

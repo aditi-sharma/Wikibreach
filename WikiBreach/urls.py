@@ -22,6 +22,8 @@ import oauth2client.contrib.django_util.site as django_util_site
 from pwnedCheck import views as view
 from authentication import views as auth_views
 from posts import views as home
+from search import views as search_views
+from subscription import views as subscribe_views
 
 urlpatterns = [
     url(r'^$', home.posts, name='home'),
@@ -29,7 +31,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^getAlerts/', view.get_profile_required, name='getAlerts'),
     url(r'^posts/', include('posts.urls')),
+    url(r'^search', search_views.search, name='search'),
     url(r'^pwnedCheck/', view.pwnedCheck, name='pwnedCheck'),
+    url('^subscribe/', subscribe_views.subscribe, name='subscribe'),
+    # url(r'^privacyRightsRecord/(?P<id>[-\w]+)/$', view.getPrivacyRightsData, name='privacyRightsRecord'),
     url(r'^getBreaches/', view.getBreaches),
     url(r'^login/$', views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}, name='login'),
     url(r'^logout/$', views.logout, {'template_name': 'logout.html'}, name='logout'),

@@ -1,0 +1,22 @@
+<style>
+    .list-group{
+        width: 100% !important;
+    }
+
+    .active{
+        color: #feb22f !important;
+        background-color: black !important;
+    }
+</style>
+
+
+<div class="list-group">
+    <a href="{% url 'search' %}?q={{ querystring }}&type=google_alerts" class="list-group-item{% if active == 'google_alerts' %} active{% endif %}">
+    <span>WikiBreach Posts</span>
+    <span class="badge">{{ count.google_alerts }}</span>
+        <a href="{% url 'search' %}?q={{ querystring }}&type=privacy_rights_record" class="list-group-item{% if active == 'privacy_rights_record' %} active{% endif %}">
+    <span>Privacy Rights ClearingHouse Records</span>
+    <span class="badge">{{ count.privacy_rights_record }}</span>
+
+  </a>
+</div>

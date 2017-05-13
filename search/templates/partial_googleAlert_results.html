@@ -1,0 +1,27 @@
+<style>
+  h2{
+    font-weight: bold;
+    text-decoration: underline;
+    font-family: Arial Black;
+  }
+
+</style>
+
+{% if results %}
+<h2>Posts on WikiBreach</h2>
+  <ul class="post-results">
+    {% for post in results %}
+      <li post-slug="{{ post.slug }}">
+        <h4><a href="{% url 'post' post.slug %}">{{ post.title }}</a></h4>
+        <div class="info">
+          <span class="date">
+            <span class="glyphicon glyphicon-calendar"></span>
+            {{ post.create_date }}
+          </span>
+          <div class="post-content" align="justify">{{ post.get_summary_as_markdown|safe }}</div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+

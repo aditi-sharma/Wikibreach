@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+
+  h1 {
+    font-color: black !important;
+  }
+
+  .btn{
+    border-style: solid;
+    border: 1px;
+    border-color: black;
+    height: 35px;
+  }
+
+    h2 {
+    text-align: center !important;
+    font-color: #f2f !important;
+    font-size: 25px;
+  }
+
+
+</style>
+
+
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-3">
+        <h4>Filter by repository</h4>
+      </div>
+      <div class="col-md-9">
+        <h1> Search Results </h1> <br/>
+        <form role="search" action="{% url 'search' %}">
+          <input type="hidden" name="type" value="{{ active }}">
+          <div class="input-group">
+            <input type="text" class="form-control input-md" name="q" placeholder="" value="{{ querystring }}">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-search"></span></button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      {% include 'partial_results_menu.html' with active=active count=count querystring=querystring %}
+    </div>
+    <div class="col-md-9" id="results">
+      {% if active == 'google_alerts' %}
+        {% include 'partial_googleAlert_results.html' with results=results page_results=page_results %}
+      {% elif active == 'privacy_rights_record' %}
+        {% include 'partial_privacyRights_results.html' with page_results=page_results %}
+      {% endif %}
+      {% if page_results%}
+        {% include 'search_paginator.html' with paginator=page_results querystring=querystring active=active range=page_range %}
+      {% else %}
+      <p align="center" style="font-size: 20px;">No posts were found :( </p>
+      {% endif %}
+    </div>
+  </div>
+  </div>
+{% endblock %}
