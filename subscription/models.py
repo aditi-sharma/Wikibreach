@@ -2,6 +2,8 @@ from django.db import models
 
 
 # Create your models here.
+from django import forms
+
 
 class SubscribedUser(models.Model):
     email = models.EmailField(max_length=255, primary_key=True, blank=False, null=False)
@@ -17,6 +19,13 @@ class SubscribedUser(models.Model):
         return self.email
 
     @staticmethod
+    def get_emails():
+        email_list = SubscribedUser.objects.filter(is_active=True)
+        emails = email_list.values_list('email', flat=True)
+        return emails
+
+
+    @staticmethod
     def subscribe(email):
       user, created = SubscribedUser.objects.get_or_create(email=email)
 
@@ -24,3 +33,8 @@ class SubscribedUser(models.Model):
     @staticmethod
     def unsubscribe(email):
         SubscribedUser.objects.filter(email=email).update(is_active=False)
+
+
+
+
+

@@ -17,6 +17,7 @@ import pypwned
 
 
 # Create your views here.
+from posts.models import UserPost
 from pwnedCheck.models import PrivacyRightsRecord
 
 
@@ -31,7 +32,6 @@ def pwnedCheck(request):
 
 
 data = {}
-
 
 @decorators.oauth_required
 @csrf_protect
@@ -56,7 +56,7 @@ def get_profile_required(request):
             return HttpResponse("Error occured" + id + response)
     else:
         try:
-            response = GMAIL.users().messages().list(userId='wikibreach2017@gmail.com').execute()
+            response = GMAIL.users().messages().list(userId='wikibreach2017@gmail.com', q='googlealerts-noreply@google.com').execute()
             data2 = response['messages']
             for message in data2:
                 alert = []
@@ -77,6 +77,11 @@ def get_profile_required(request):
         except errors.HttpError as error:
             print('An error occurred: %s' % error)
 
+        user_posts = UserPost.get_user_posts()
+        if user_posts:
+            return render(request, 'curation.html', {'messages': data, 'user_posts': user_posts})
+        else:
+            return render(request, 'curation.html', {'messages': data})
         # paginator = Paginator(data.items(), 5)
         # page = request.GET.get('page')
         # try:
@@ -85,7 +90,7 @@ def get_profile_required(request):
         #     pages = paginator.page(1)
         # except EmptyPage:
         #     pages = paginator.page(paginator.num_pages)
-        return render(request, 'curation.html', {'messages': data})
+
 
 
 @decorators.oauth_required
@@ -128,10 +133,3 @@ def authorize(request):
         return HttpResponse(json.dumps(sendData))
     except errors.HttpError as error:
         print('An error occurred: %s' % error)
-
-
-
-# @login_required
-# def getPrivacyRightsData(request, id):
-#     record = get_object_or_404(PrivacyRightsRecord, id=id)
-#     return render(request, 'privacy_rights_clearingHouse_post.html', {'record': record})

@@ -10,10 +10,11 @@ import markdown
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255)
+    slug = models.SlugField(max_length=255, null=True, blank=True)
     content = models.TextField(max_length=6000)
     source_url = models.URLField(max_length=300)
     breach_date = models.DateField()
+    create_user = models.ForeignKey(User, default=1)
     create_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(blank=True, null=True)
 
@@ -95,3 +96,34 @@ class Tag(models.Model):
                 count[tag.tag] = 1
         sorted_count = sorted(count.items(), key=lambda t: t[1], reverse=True)
         return sorted_count[:20]
+
+
+class UserPost(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField(max_length=6000)
+    source_url = models.URLField(max_length=300)
+    breach_date = models.DateField()
+    submitted_date = models.DateTimeField(auto_now_add=True)
+    username = models
+    create_user = models.ForeignKey(User, default=1)
+
+    tags = models.CharField(max_length=255, null=True)
+
+    class Meta:
+        verbose_name = "UserPost"
+        verbose_name_plural = "UserPosts"
+        ordering = ["-submitted_date"]
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        super(UserPost, self).save(*args, **kwargs)
+
+    def get_content_as_markdown(self):
+        return markdown.markdown(self.content, safe_mode='escape')
+
+    @staticmethod
+    def get_user_posts():
+        userposts = UserPost.objects.all()
+        return userposts

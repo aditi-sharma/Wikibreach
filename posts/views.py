@@ -1,9 +1,12 @@
 from http import client
+from django.db import Error
 
 import base64
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from bs4 import BeautifulSoup
 from django.contrib.auth.decorators import login_required
+from django.http import QueryDict
 from googleapiclient import discovery
 from googleapiclient import errors
 from httplib2 import Http
@@ -14,11 +17,12 @@ from oauth2client import file, client, tools
 from dateutil import parser
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
-from posts.forms import PostForm
+from posts.forms import UserPostForm, PostForm
 from django.shortcuts import get_object_or_404, redirect, render
 
 # Create your views here.
-from posts.models import Post, Tag
+from posts.models import Post, Tag, UserPost
+from send_alerts import send_email
 
 
 def _posts(request, posts):
@@ -50,6 +54,7 @@ def post(request, slug):
 @decorators.oauth_required
 @csrf_protect
 def createPost(request, id):
+    global GMAIL
     try:
         store = file.Storage('WikiBreach/gmail.json')
         creds = store.get()
@@ -102,12 +107,22 @@ def publishPost(request):
         post.content = form.cleaned_data.get('content')
         post.source_url = form.cleaned_data.get('source_url')
         post.breach_date = form.cleaned_data.get('breach_date')
-        post.save()
-        tags = form.cleaned_data.get('tags')
-        post.create_tags(tags)
-        return render(request, 'allPosts.html')
+        user = form.cleaned_data.get('created_by_user')
+        if user:
+            post.create_user = User.objects.get(username=user)
+        else:
+            post.create_user = request.user
+        try:
+            post.save()
+            tags = form.cleaned_data.get('tags')
+            post.create_tags(tags)
+            breach_alert = get_object_or_404(Post, title=post.title, breach_date=post.breach_date)
+            # send_email(breach_alert.title, breach_alert.slug)
+            return redirect('post', slug=breach_alert.slug)
+        except Error:
+            return HttpResponse(Error)
     else:
-        return HttpResponse("Error occurred")
+        return HttpResponse(form.errors)
 
 
 def tag(request, tag_name):
@@ -118,7 +133,7 @@ def tag(request, tag_name):
     return posts(request, posts)
 
 
-def editPost(request, slug, ):
+def editPost(request, slug):
     tags = []
     post = get_object_or_404(Post, slug=slug)
     for tag in post.get_tags():
@@ -143,3 +158,48 @@ def deletePost(request, slug):
     post = get_object_or_404(Post, slug=slug)
     post.delete()
     return redirect('/posts/')
+
+
+def user_post(request, id):
+    post = get_object_or_404(UserPost, id=id)
+    date = parser.parse(str(post.breach_date)).strftime('%Y-%m-%d')
+    title = post.title
+    tags = post.tags
+    content = post.content
+    source_url = post.source_url
+    user = post.create_user
+    post.delete()
+    return render(request, 'createPost.html',
+                  {'title': title, 'date': date, 'keyword': tags, 'description': content,
+                   'sourcelink': source_url, 'by_user': user})
+
+
+def delete_user_post(request):
+    try:
+        id = QueryDict(request.body).get('id')
+        post = get_object_or_404(UserPost, id=id)
+        post.delete()
+        return HttpResponse("User post deleted")
+    except errors.HttpError:
+        return HttpResponse("Error occured" + id + post.title)
+
+
+def contribute(request):
+    if request.method == 'POST':
+        form = UserPostForm(request.POST)
+        if form.is_valid():
+            post = UserPost()
+            post.title = form.cleaned_data.get('title')
+            post.content = form.cleaned_data.get('content')
+            post.source_url = form.cleaned_data.get('source_url')
+            post.breach_date = form.cleaned_data.get('breach_date')
+            post.create_user = request.user
+            post.tags = form.cleaned_data.get('tags')
+            post.save()
+            return render(request, 'user_submitted_post.html', {'post_success': True, 'form': UserPostForm()})
+        else:
+            return render(request, 'user_submitted_post.html',
+                          {'form': form})
+    else:
+        return render(request, 'user_submitted_post.html',
+                      {'form': UserPostForm()})

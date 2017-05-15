@@ -20,11 +20,11 @@ def SignupDomainValidator(value):
             domain = value[value.index("@"):]
             if domain not in ALLOWED_SIGNUP_DOMAINS:
                 raise ValidationError('Invalid domain. Allowed domains on this network: {0}'.format(
-                    ','.join(ALLOWED_SIGNUP_DOMAINS)))  # noqa: E501
+                    ','.join(ALLOWED_SIGNUP_DOMAINS)))
 
         except Exception:
             raise ValidationError('Invalid domain. Allowed domains on this network: {0}'.format(
-                ','.join(ALLOWED_SIGNUP_DOMAINS)))  # noqa: E501
+                ','.join(ALLOWED_SIGNUP_DOMAINS)))
 
 
 def ForbiddenUsernamesValidator(value):
@@ -33,9 +33,9 @@ def ForbiddenUsernamesValidator(value):
                            'cookie', 'new', 'login', 'logout', 'administrator',
                            'join', 'account', 'username', 'root', 'post',
                            'user', 'users', 'subscribe', 'edit', 'mail', 'email',
-                           'home', 'newsletter', 'profile', 'register', 'auth',
+                           'home', 'newsletter', 'search', 'register', 'auth',
                            'authentication', 'config', 'delete', 'remove', 'curation',
-                           'contact', 'faq', 'log', 'registration', 'search', 'static',
+                           'contact', 'subscription', 'faq', 'log', 'pwnedCheck', 'search', 'static',
                            'setting', 'css', 'js', 'paginator', 'authorize']
 
     if value.lower() in forbidden_usernames:

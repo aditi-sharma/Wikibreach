@@ -42,11 +42,15 @@
           <label for="content">Content of the Post: </label>
           <textarea class="form-control" rows="8" name="content" form="createPostForm" >{{description}} </textarea>
           <label for="dateOfbreach">Date of the breach:</label> <br/>
-          <input type="text"  class ="form-control" name="breach_date" size="20" value="{{date}}" maxlength='50' size="25">
+          <input type="text"  class ="form-control" name="breach_date" value="{{date}}" maxlength='50' size="25">
           <label for="sourceURL">Link to the Source:</label> <br/>
           <textarea class="form-control" rows="3" name="source_url" form="createPostForm"> {{sourcelink}} </textarea>
           <span><label for="tags">Tags:</label> <p style="display:inline"> *Use spaces to separate the tags, such as "java jsf primefaces" </p> </span><br/>
-          <input type="text" class ="form-control" name="tags" size="20" value="{{keyword}}" maxlength='50' size="25"> <br/>
+          <input type="text" class ="form-control" name="tags" value="{{keyword}}" maxlength='50' size="25"> <br/>
+          {% if by_user %}
+            <label for="createdbyuser">Created By User:</label><br/>
+            <input type="text" class ="form-control" name="created_by_user" size="20" value="{{by_user}}"> <br/>
+          {% endif %}
           <a class="btn btn-default pull-right" data-toggle="modal" href="" > Close </a>
           <a class="btn btn-primary btn-default pull-right" data-toggle="modal" data-target="#confirm" > Publish Post</a>
         </div>

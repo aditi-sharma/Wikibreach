@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+
+  .panel-heading{
+    width: 100%;
+    background-color: black !important;
+    color: white !important;
+    font-weight: bold;
+    font-size: 30px !important;
+    text-align: center;
+    font-family: Arial Black;
+    letter-spacing: 1px;
+  }
+
+  .panel-default{
+  border: 3px;
+    border-color: black;
+    border-style: solid;
+  }
+
+  label{
+    color: black !important;
+  }
+
+  .btn-primary {
+    background-color: #feb22f;
+    color: black;
+    width: 100%;
+  }
+
+  .btn-primary:hover{
+    background-color: black;
+    color: #feb22f;
+    width: 100%;
+  }
+
+  p {
+    color: black !important;
+    font-size: 15px !important;
+  }
+
+    .control-label{
+        color:red;
+    }
+</style>
+  {% if request.user.is_authenticated %}
+    {% if post_success%}
+        <div class="alert alert-success alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <p align="center"> Your report has been submitted successfully. We appreciate your contribution. </div>
+    {% endif %}
+ <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="panel-heading">
+              <h3 class="panel-title"><span class="glyphicon glyphicon-pencil">&nbsp;</span>Report a Breach</h3>
+                </div>
+   <div class="panel panel-default">
+       <div class="panel-body">
+    <form action="{% url 'contribute' %}" method="post" role="form">
+      {% csrf_token %}
+      {% for field in form.visible_fields %}
+        <div class="form-group{% if field.errors %} has-error{% endif %}">
+          <label for="{{ field.label }}">{{ field.label }}:</label>
+          {{ field }}
+          {% if field.help_text %}
+            <span class="help-block">{{ field.help_text|safe }}</span>
+          {% endif %}
+          {% for error in field.errors %}
+            <label class="control-label">{{ error }}</label>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      <button class="btn btn-primary pull-right" data-toggle="modal" type="submit" > Submit Post</button>
+        </form>
+            </div>
+        </div>
+    </div>
+</div>
+  {% else %}
+    <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <p align="center"> You need to login/create an account to submit breach report!</p> </div>
+          {% include 'requireLogin.html' %}
+
+  {% endif %}
+
+{% endblock %}
+{% block javascript %}
+
+
+<script>
+{% if not user.is_authenticated %}
+$("ul.nav.navbar-nav.navbar-right").css("display","none");
+{% endif %}
+
+
+</script>
+
+{% endblock %}
