@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+
+{% block content%}
+<style>
+
+p{
+margin-left: 20%;
+margin-right:20%;
+color: black;
+font-size: 17px;
+}
+
+form {
+margin: 0 auto;
+width:500px;
+color: black;
+}
+
+
+</style>
+
+{% if message_submitted %}
+    {% if message_submitted == True %}
+        <div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <p align="center"> Your message has been submitted successfully.</p> </div>
+    {% else %}
+        <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <p align="center"> Your message was not submitted! Please try again later</p> </div>
+    {% endif %}
+{% endif%}
+<h3 align="center" style="color:black;">Contact Us </h3>
+<p align="center">
+<br/>
+    For submissions, please visit the <a href="{%url 'contribute'%}" target="_blank">Be a Contributor </a>page. <br/> <br/>
+
+WikiBreach is currently accepting applications for high quality advertising. Our audience includes a broad cross-section of financial services industry executives, as well as decision-makers and experts in the technology and security products and services sectors.
+
+<br/> <br/> Currently, we support a 300x250 pixel box in the premium upper right side location and a 90x728 banner on the right side location. We also offer a 468x60 spot that runs at the end of every posting. All ad images must be approved before running.
+
+For advertising and general inquiries (not submissions) please email use the form below:
+</p>
+<br/>
+<form role="form" action="{% url 'contactUs' %}" method="post">
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+        <div class="form-group{% if field.errors %} has-error{% endif %}">
+          <label for="{{ field.label }}">{{ field.label }}: *</label> <br/>
+          {{ field }}
+          {% if field.help_text %}
+            <span class="help-block">{{ field.help_text|safe }}</span>
+          {% endif %}
+          {% for error in field.errors %}
+            <label class="control-label">{{ error }}</label>
+          {% endfor %}
+        </div>
+      {% endfor %} <br/>
+      <button class="btn btn-primary btn-md center-block" data-toggle="modal" type="submit"> Submit </button>
+</form>
+{% endblock %}

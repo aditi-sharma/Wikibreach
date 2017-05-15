@@ -34,10 +34,14 @@ urlpatterns = [
     url(r'^search', search_views.search, name='search'),
     url(r'^pwnedCheck/', view.pwnedCheck, name='pwnedCheck'),
     url('^subscribe/', subscribe_views.subscribe, name='subscribe'),
+    url('^contactUs/', subscribe_views.contactUs, name='contactUs'),
+    url('^aboutUs/', subscribe_views.aboutUs, name='aboutUs'),
+    # url('^sendAlert/', subscribe_views.send_email),
     # url(r'^privacyRightsRecord/(?P<id>[-\w]+)/$', view.getPrivacyRightsData, name='privacyRightsRecord'),
     url(r'^getBreaches/', view.getBreaches),
     url(r'^login/$', views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}, name='login'),
     url(r'^logout/$', views.logout, {'template_name': 'logout.html'}, name='logout'),
     url(r'^oauth2/', urls.include(django_util_site.urls)),
+    url(r'^rejectUserPost/', home.delete_user_post, name='rejectUserPost'),
 
 ]

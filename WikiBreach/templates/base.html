@@ -10,18 +10,20 @@
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
   body {
       font: 400 15px Lato, sans-serif;
       line-height: 1.8;
       color: #818181;
   }
-  h2 {
+  h2 a{
       font-size: 19px;
       color: #feb22f;
       font-weight: 600;
       margin-bottom: 30px;
   }
+
   h4 {
       font-size: 15px;
       line-height: 1.375em;
@@ -191,8 +193,9 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{% url 'posts'%}">Home</a></li>
-        <li><a href="#aboutUs">About Us</a></li>
-        <li><a href="#contactUs">Contact Us</a></li>
+        <li><a href="{% url 'aboutUs'%}">About Us</a></li>
+        <li><a href="{% url 'contactUs'%}">Contact Us</a></li>
+        <li><a href="{% url 'contribute'%}">Be a Contributor</a></li>
       </ul>
     </div>
   </div>
@@ -249,28 +252,32 @@
  {% block content %}
 
 {% endblock%}
-<br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/><br/> <br/>
+<br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/>
 <footer>
   <div class="container" align="left">
+      <div class="row">
     <form class="form-inline" method="post" role="form" id="subscribeForm" action="{% url 'subscribe'%}">
   {% csrf_token %} {{ form.errors }}
 {{ form.non_field_errors }}
-      <div class="col-md-4">
+          <div class="col-md-4">
         <h4> Subscribe to breach updates: </h4>
         <div class="form-group">
         <div class="input-group">
           <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
           <input type="text" class="form-control input-sm" name="email" id="email"  placeholder="Enter your Email"/>
         </div>
-          <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+          <button type="submit" class="btn btn-default btn-sm" style="background-color:#428bca;color:white;">Subscribe</button>
         </div>
       </div>
     </form>
+      <div class="col-md-6">
       <h4 align="center"> Powered By:</h4>
-      <h2 align="center"> Summers & Company and @HowHackersThink</h2>
-    <div class="inline"> <h4 align="right"> Follow Us: </h4>
-    </div>
-
+          <div class="footer_link" align="center" style="font-size: 17px;"> <a href="https://www.summersco.us/#welcome" target="_blank" style="color:#feb22f;">Summers & Company </a> <h4 style="display:inline;"> and  </h4><a href="https://twitter.com/HowHackersThink" target="_blank" style="color:#feb22f;"> @HowHackersThink</a></div>
+      </div>
+      <div class="col-md-2">
+      <span class="inline"> <h4 align="right">Follow us: &nbsp; <a href="https://twitter.com/HowHackersThink" target="_blank"><button class="btn btn-social-icon btn-twitter" style="background-color:white; display: inline-block;"> <i class="fa fa-twitter" style="font-size:20px"></i></button></a> </h4></span>
+      </div>
+  </div>
   </div>
 </footer>
 <script>

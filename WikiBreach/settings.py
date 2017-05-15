@@ -38,7 +38,7 @@ ADMINS = (
 INSTALLED_APPS = [
     'pwnedCheck.apps.PwnedcheckConfig',
     'posts.apps.PostsConfig',
-    'subscription.apps.Subscription',
+    'subscription.apps.SubscriptionConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +50,16 @@ INSTALLED_APPS = [
     'sslserver',
 
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'wikibreach2017@gmail.com'
+EMAIL_HOST_PASSWORD = 'summers&company'
+EMAIL_PORT = 587
+
+ADMIN_EMAIL = 'wikibreach2017@gmail.com'
+CONTACT_EMAIL = 'aditisharma.b@gmail.com'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

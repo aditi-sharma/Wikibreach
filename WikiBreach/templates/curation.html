@@ -43,7 +43,9 @@ td {
 
 }
 
-.nav li a:active{
+.with-nav-tabs > .nav-tabs > li.active > a,
+.with-nav-tabs > .nav-tabs > li.active > a:hover,
+.with-nav-tabs > .nav-tabs > li.active > a:focus{
     background-color:black !important;
     color:#feb22f !important;
 }
@@ -55,12 +57,15 @@ td {
  <div id='loadingmessage' style='display:none'>
   <img src="{% static '/images/ajax-loader.gif' %}"/>
 </div>
+ <div class="nav">
 <div class="container">
-    <ul class="nav nav-tabs" style="border-color: black; border:3px; border-type:solid;">
-        <li class="active"><a data-toggle="tab" href="#alerts" style="background-color:black;color:#feb22f;">Google Alerts</a></li>
+    <div class="with-nav-tabs">
+    <ul class="nav nav-tabs" id="myTab" data-tabs="tabs">
+        <li class="active"><a data-toggle="tab" href="#alerts">Google Alerts</a></li>
         <li><a data-toggle="tab" href="#userposts">User Submitted Posts</a></li>
     </ul>
-  <div class="tab content">
+    </div>
+    <div class="tab-content">
       <div id="alerts" class="tab-pane fade in active">
           <form class="form-inline"> {% csrf_token %}
               <div class="table-responsive table-bordered">
@@ -70,8 +75,8 @@ td {
                       <tr id={{key}}>
                           <td> {{ value.0 }} <br/>
                               <a href= {{ value.1 }} target="_blank"> View full news </a>
-                              <button type="button"  id ="delete_{{forloop.counter0|add:count}}" value={{key}} class="btn btn-danger btn-sm pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                              <a href="{% url 'createPost' key %}"><button type="button" id ="accept_{{forloop.counter0|add:count}}" value="Accept" class="btn btn-success btn-sm pull-right"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></a>
+                              <button type="button" id ="deleteAlert_{{forloop.counter0|add:count}}" value={{key}} class="btn btn-danger btn-sm pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                              <a href="{% url 'createPost' key %}"><button type="button" id ="acceptAlert_{{forloop.counter0|add:count}}" value="Accept" class="btn btn-success btn-sm pull-right"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></a>
                           </td>
                       </tr>
                       {% endfor %}
@@ -80,14 +85,37 @@ td {
               </div>
           </form>
       </div>
-      <div id="userposts" class="tab-pane fade">
-         <p> User submitted posts are here </p>
+        <div id="userposts" class="tab-pane fade">
+         {% if user_posts %}
+          <form class="form-inline"> {% csrf_token %}
+              <div class="table-responsive table-bordered">
+                  <table class="table">
+                      {% with count=0 %}
+                      {% for post in user_posts %}
+                      <tr id={{post.id}}>
+                          <td>  <p style="color:black;"> Submitted By: <strong>{{post.create_user.username}}</strong> </p>
+                              <p>{{ post.title }} </p>
+                              <a href= {{post.source_url}} target="_blank"> View provided source link </a>
+                              <button type="button" id="deletePost_{{forloop.counter0|add:count}}" class="btn btn-danger btn-sm pull-right" value={{post.id}}><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                              <a href="{% url 'createUserPost' post.id %}"><button type="button" id ="acceptPost_{{forloop.counter0|add:count}}" value="Accept" class="btn btn-success btn-sm pull-right"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></a>
+                          </td>
+                      </tr>
+                      {% endfor %}
+                      {% endwith %}
+                  </table>
+              </div>
+          </form>
+          {% else %}
+         <p> There are no user submitted posts </p>
+          {% endif %}
       </div>
-  </div>
+      </div>
+</div>
+ </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
             <script type ="text/javascript">
-     $('[id^=delete]').unbind().click(function(e) {
+     $('[id^=deleteAlert]').unbind().click(function(e) {
         // do NOT submit the form as a regular POST request
         e.preventDefault();
         <!--$('#loadingmessage').show();-->
@@ -112,12 +140,33 @@ td {
                 });
      });
 
+     $('[id^=deletePost]').unbind().click(function(e) {
+        // do NOT submit the form as a regular POST request
+        e.preventDefault();
+        id = $(this).attr('value');
+        $.ajax({
+            type: 'POST',
+            url: '/rejectUserPost/',
+            data: {'id': id},
+            success: function() {
+                alert('User Post deleted!');
+                $('#'+id).remove();
+             },
+            fail : function() {
+                alert('Unable to delete the user post. Please reload page and try again!');
+            },
+            error : function(xhr,errmsg,err) {
+            alert('Unable to delete the user post. Please reload page and try again!');
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+                });
+     });
+
+
     $(window).load(function() {
 		// Animate loader off screen
 		$(".loadingmessage").fadeOut("slow");
 	});
-
-
 
     function getCookie(name) {
     var cookieValue = null;
