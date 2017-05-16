@@ -6,7 +6,7 @@ from django.db.models import Q
 
 # Create your views here.
 from posts.models import Post
-from pwnedCheck.models import PrivacyRightsRecord
+from curateGoogleAlerts.models import PrivacyRightsRecord
 
 
 def search(request):

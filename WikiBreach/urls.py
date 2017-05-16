@@ -19,7 +19,7 @@ from django.contrib.auth import views
 from authentication.forms import LoginForm
 from django.conf import urls
 import oauth2client.contrib.django_util.site as django_util_site
-from pwnedCheck import views as view
+from curateGoogleAlerts import views as view
 from authentication import views as auth_views
 from posts import views as home
 from search import views as search_views

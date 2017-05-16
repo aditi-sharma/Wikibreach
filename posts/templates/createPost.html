@@ -28,7 +28,7 @@
 }
 </style>
 
-<form action="{% url 'publishPost' %}" method="post" role="form" id="createPostForm">
+<form action="{% url 'publishPost' message_id %}" method="post" role="form" id="createPostForm">
   {% csrf_token %}
   <div class="container">
     <div class="panel panel-primary">

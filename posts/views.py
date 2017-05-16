@@ -17,6 +17,7 @@ from oauth2client import file, client, tools
 from dateutil import parser
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
+from curateGoogleAlerts.views import deleteGoogleAlert
 from posts.forms import UserPostForm, PostForm
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -26,7 +27,7 @@ from send_alerts import send_email
 
 
 def _posts(request, posts):
-    paginator = Paginator(posts, 10)
+    paginator = Paginator(posts, 15)
     page = request.GET.get('page')
     try:
         posts = paginator.page(page)
@@ -34,10 +35,8 @@ def _posts(request, posts):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-    popular_tags = Tag.get_popular_tags()
     return render(request, 'allPosts.html', {
         'posts': posts,
-        'popular_tags': popular_tags
     })
 
 
@@ -49,7 +48,6 @@ def posts(request):
 def post(request, slug):
     post = get_object_or_404(Post, slug=slug)
     return render(request, 'post.html', {'post': post})
-
 
 @decorators.oauth_required
 @csrf_protect
@@ -93,13 +91,13 @@ def createPost(request, id):
         source_url = widgets['url']
         return render(request, 'createPost.html',
                       {'title': title, 'date': date, 'keyword': keyword, 'description': description,
-                       'sourcelink': source_url})
+                       'sourcelink': source_url, 'message_id': id})
     except errors.HttpError as error:
         print('An error occurred: %s' % error)
 
 
 @login_required
-def publishPost(request):
+def publishPost(request, id):
     form = PostForm(request.POST)
     if form.is_valid():
         post = Post()
@@ -118,6 +116,8 @@ def publishPost(request):
             post.create_tags(tags)
             breach_alert = get_object_or_404(Post, title=post.title, breach_date=post.breach_date)
             # send_email(breach_alert.title, breach_alert.slug)
+            if id:
+                deleteGoogleAlert(request, id)
             return redirect('post', slug=breach_alert.slug)
         except Error:
             return HttpResponse(Error)

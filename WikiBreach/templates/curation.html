@@ -43,9 +43,7 @@ td {
 
 }
 
-.with-nav-tabs > .nav-tabs > li.active > a,
-.with-nav-tabs > .nav-tabs > li.active > a:hover,
-.with-nav-tabs > .nav-tabs > li.active > a:focus{
+ .with-nav-tabs> .nav nav-tabs > li.active > a{
     background-color:black !important;
     color:#feb22f !important;
 }
@@ -57,12 +55,11 @@ td {
  <div id='loadingmessage' style='display:none'>
   <img src="{% static '/images/ajax-loader.gif' %}"/>
 </div>
- <div class="nav">
 <div class="container">
     <div class="with-nav-tabs">
     <ul class="nav nav-tabs" id="myTab" data-tabs="tabs">
-        <li class="active"><a data-toggle="tab" href="#alerts">Google Alerts</a></li>
-        <li><a data-toggle="tab" href="#userposts">User Submitted Posts</a></li>
+        <li class="active"><a data-toggle="tab" href="#alerts" style="background-color:black;color:#feb22f;">Google Alerts</a></li>
+        <li><a data-toggle="tab" href="#userposts" style="background-color:#feb22f; color:black;">User Submitted Posts</a></li>
     </ul>
     </div>
     <div class="tab-content">
@@ -111,7 +108,6 @@ td {
       </div>
       </div>
 </div>
- </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
             <script type ="text/javascript">

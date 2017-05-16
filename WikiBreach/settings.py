@@ -36,7 +36,7 @@ ADMINS = (
 # Application definition
 
 INSTALLED_APPS = [
-    'pwnedCheck.apps.PwnedcheckConfig',
+    'curateGoogleAlerts.apps.CurateGoogleAlertsConfig',
     'posts.apps.PostsConfig',
     'subscription.apps.SubscriptionConfig',
     'django.contrib.admin',
@@ -65,7 +65,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'pwnedCheck.middleware.HttpPostTunnelingMiddleware',
+    'curateGoogleAlerts.middleware.HttpPostTunnelingMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -77,7 +77,7 @@ GOOGLE_OAUTH2_CLIENT_SECRETS_JSON = 'WikiBreach/client_secret.json'
 GOOGLE_OAUTH2_SCOPES = ('https://www.googleapis.com/auth/gmail.readonly',)
 
 GOOGLE_OAUTH2_STORAGE_MODEL = {
-    'model' : 'pwnedCheck.models.CredentialsModel',
+    'model' : 'curateGoogleAlerts.models.CredentialsModel',
     'user_property': 'user_id',
     'credentials_property': 'credential',
 }

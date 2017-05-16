@@ -1,6 +1,13 @@
+<style>
+  .pagination {
+    position:relative;
+    margin-left: 40% !important;
+    margin-top: 10%;
+  }
+</style>
 <ul class="pagination">
   {% if paginator.has_previous %}
-    <li><a href="?page={{ paginator.previous_page_number }}">&laquo;</a></li>
+    <li><a href="?page={{ paginator.previous_page_number }}">&laquo; Previous</a></li>
   {% else %}
     <li class="disabled"><span>&laquo;</span></li>
   {% endif %}
@@ -12,8 +19,8 @@
     {% endif %}
   {% endfor %}
   {% if paginator.has_next %}
-    <li><a href="?page={{ paginator.next_page_number }}">&raquo;</a></li>
+    <li><a href="?page={{ paginator.next_page_number }}">Next&raquo;</a></li>
   {% else %}
-    <li class="disabled"><span>&raquo;</span></li>
+    <li class="disabled"><span>Next&raquo;</span></li>
   {% endif %}
 </ul>

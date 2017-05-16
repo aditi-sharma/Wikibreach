@@ -113,7 +113,8 @@ body {
         </div>
 {% endfor %}
    </div>
+   {% include 'paginator.html' with paginator=posts %}
    {% endwith %}
+<br/>
 
-    {% include 'paginator.html' with paginator=posts %}
 {% endblock %}
