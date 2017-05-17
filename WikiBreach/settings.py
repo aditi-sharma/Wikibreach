@@ -87,7 +87,7 @@ ROOT_URLCONF = 'WikiBreach.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['WikiBreach/templates', 'WikiBreach/posts/templates','search/templates', 'authentication/templates', 'subscription/templates'],
+        'DIRS': ['WikiBreach/templates', 'WikiBreach/posts/templates','search/templates', 'authentication/templates', 'curateGoogleAlerts/templates', 'subscription/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

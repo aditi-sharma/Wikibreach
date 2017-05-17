@@ -4,14 +4,14 @@
 {% block content%}
 <style>
 
-p{
-margin-left: 20%;
+.content{
+margin-left: 20% !important;
 margin-right:20%;
 color: black;
 font-size: 17px;
 }
 
-form {
+#contactForm {
 margin: 0 auto;
 width:500px;
 color: black;
@@ -32,7 +32,7 @@ color: black;
     {% endif %}
 {% endif%}
 <h3 align="center" style="color:black;">Contact Us </h3>
-<p align="center">
+<div class ="content" align="center">
 <br/>
     For submissions, please visit the <a href="{%url 'contribute'%}" target="_blank">Be a Contributor </a>page. <br/> <br/>
 
@@ -41,9 +41,9 @@ WikiBreach is currently accepting applications for high quality advertising. Our
 <br/> <br/> Currently, we support a 300x250 pixel box in the premium upper right side location and a 90x728 banner on the right side location. We also offer a 468x60 spot that runs at the end of every posting. All ad images must be approved before running.
 
 For advertising and general inquiries (not submissions) please email use the form below:
-</p>
+</div>
 <br/>
-<form role="form" action="{% url 'contactUs' %}" method="post">
+<form role="form" action="{% url 'contactUs' %}" method="post" id="contactForm">
     {% csrf_token %}
     {% for field in form.visible_fields %}
         <div class="form-group{% if field.errors %} has-error{% endif %}">

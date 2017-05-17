@@ -121,10 +121,11 @@
     margin-left: 0px !important;
   }
 
-  footer {
+  .footer {
       font-size: 20px;
-      min-height: 120px;
+      min-height: 100px;
       background-color: #000;
+      width: 100%;
   }
 
   .input-group {
@@ -236,25 +237,12 @@
     </div>
     </div>
 </nav>
-
-<!-- Container (About Section) -->
-<!--<div id="about" class="container-fluid">-->
-  <!--<div class="row">-->
-    <!--<div class="col-sm-8">-->
-      <!--<h2>About Company Page</h2><br>-->
-      <!--<h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>-->
-      <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
-      <!--<br><button class="btn btn-default btn-lg">Get in Touch</button>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
-<br/> <br/>
+<br/><br/>
  {% block content %}
-
 {% endblock%}
-<br/> <br/><br/> <br/><br/> <br/><br/> <br/><br/>
-<footer>
-  <div class="container" align="left">
+<br/><br/>
+<div class="footer">
+  <div class="container" align="left" role="navigation">
       <div class="row">
     <form class="form-inline" method="post" role="form" id="subscribeForm" action="{% url 'subscribe'%}">
   {% csrf_token %} {{ form.errors }}
@@ -279,7 +267,7 @@
       </div>
   </div>
   </div>
-</footer>
+    </div>
 <script>
 $(document).ready(function(){
   // Add smooth scrolling to all links in navbar + footer link
