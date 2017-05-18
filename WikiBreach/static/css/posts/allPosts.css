@@ -3,6 +3,13 @@ body {
   background-color: #ececeb !important;
 }
 
+h3 {
+    margin-top: 20px !important;
+    color:black !important;
+    font-family:Arial;
+    font-weight: 600;
+}
+
 .box {
   background-color: white;
   color: black;

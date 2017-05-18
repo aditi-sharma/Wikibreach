@@ -24,7 +24,7 @@
 {% if post.get_tags %}
     <div class="tags">
       {% for tag in post.get_tags %}
-        <span class="label label-default">{{ tag }}</span>
+        <span class="label label-default"><a href="{% url 'tag' tag%}" target="_blank">{{ tag }}</a></span>
       {% endfor %}
     </div>
   {% endif %}

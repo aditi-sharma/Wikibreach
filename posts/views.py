@@ -132,7 +132,17 @@ def tag(request, tag_name):
     posts = []
     for tag in tags:
         posts.append(tag.post)
-    return posts(request, posts)
+    paginator = Paginator(posts, 15)
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    return render(request, 'allPosts.html', {
+        'posts': posts, 'tag': tag_name
+    })
 
 
 def editPost(request, slug):

@@ -85,3 +85,7 @@ div.inline {
     .control-label{
         color:red;
     }
+
+    .label a {
+        color: black;
+    }
