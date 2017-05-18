@@ -1,4 +1,5 @@
-from django.contrib.auth.decorators import login_required
+# __author__ = "Aditi Sharma"
+
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
 from django.db.models import Q

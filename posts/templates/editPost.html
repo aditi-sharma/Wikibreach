@@ -1,33 +1,7 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-
-<style>
-  .panel > .panel-heading {
-    background-image: none;
-    background-color: white;
-    border-color: #feb22f;
-    color: black;
-}
-
-  .panel > .panel-body {
-    background-image: none;
-    background-color: white;
-    border-color: #feb22f;
-    color: black;
-}
- .panel {
-    background-image: none;
-    border-color: #feb22f;
-}
-
-  legend{
-	color:black;
-	font-size:25px;
-	font-weight:bold;
-}
-</style>
-
+<link rel="stylesheet" href="{% static '/css/posts/allPosts.css'%}">
 <form action="{% url 'update' post.slug %}" method="post" role="form" id="editPostForm">
   {% csrf_token %}
   <div class="container">

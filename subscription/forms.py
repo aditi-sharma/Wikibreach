@@ -1,4 +1,4 @@
-__author__ = "Aditi Sharma"
+# __author__ = "Aditi Sharma"
 
 from django import forms
 

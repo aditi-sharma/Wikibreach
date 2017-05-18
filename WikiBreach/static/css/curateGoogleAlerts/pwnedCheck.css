@@ -1,0 +1,40 @@
+    h3 {
+    color: black;
+    text-align: center;
+    font-family: Arial Black;
+    }
+
+    input[type=text]{
+    border: 1px solid black;
+    text-align: center;
+    }
+
+
+    .resultTitle{
+    color: white;
+    background-color: green;
+    text-align: center;
+    font-family: Lucida Sans Unicode;
+    font-weight: 300;
+    font-size: 20px;
+    }
+
+    .pwnedTitle{
+    color: white;
+    background-color: red;
+    text-align: center;
+    font-family: font-family:Lucida Sans Unicode;
+    font-weight: 300;
+    font-size: 20px;
+    }
+
+    .courtesy{
+    color: black;
+    font-family: Lucida Sans Unicode;
+    }
+
+    .breachResult{
+    color: black;
+    text-align: left !important;
+    font-family: Arial;
+    }

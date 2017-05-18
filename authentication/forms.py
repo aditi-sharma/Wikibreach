@@ -1,4 +1,4 @@
-__author__ = "Aditi Sharma"
+# __author__ = "Aditi Sharma"
 
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms

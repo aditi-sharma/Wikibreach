@@ -1,111 +1,51 @@
+{% load static %}
 {% block content %}
-<style>
-
-  .panel-heading{
-    width: 50%;
-    background-color: black !important;
-    color: white !important;
-    font-weight: bold;
-    font-size: 24px !important;
-  }
-
-  .panel-default{
-    border: 3px;
-    border-color: black;
-    border-style: solid;
-  }
-
-  label{
-    color: black !important;
-  }
-
-  .form-control{
-    border: 1px;
-    border-color: black;
-    border-style: solid;
-  }
-
-  .btn-primary {
-    background-color: #feb22f;
-    color: black;
-    width: 100%;
-    border: 1px;
-    border-color: black;
-    border-style: solid;
-  }
-
-  .btn-primary:hover{
-    background-color: black;
-    color: #feb22f;
-    width: 100%;
-    border: 1px;
-    border-color: black;
-    border-style: solid;
-  }
-
-  .btn-default{
-    background-color: white;
-    color: black;
-    width: 100%;
-    border: 0.5px;
-    border-color: black;
-    border-style: solid;
-  }
-
-  p {
-    color: black !important;
-    font-size: 15px !important;
-    padding-top: 7px !important;
-    padding-bottom: 7px !important;
-  }
-</style>
-
-    {% if form.non_field_errors %}
-      {% for error in form.non_field_errors %}
-        <div class="alert alert-danger alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          {{ error }}
+<link rel="stylesheet" href="{% static '/css/authentication/login.css'%}">
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+<div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    {{ error }}
+</div>
+{% endfor %}
+{% endif %}
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="panel-heading">
+            <h3 class="panel-title">Log into your account</h3>
         </div>
-      {% endfor %}
-    {% endif %}
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-          <div class="panel-heading">
-                  <h3 class="panel-title">Log into your account</h3>
-                </div>
-   <div class="panel panel-default">
-       <div class="panel-body">
-    <form action="{% url 'login' %}" method="post" role="form">
-      {% csrf_token %}
-        <div class="form-group{% if form.username.errors %} has-error{% endif %}">
-          <label for="username">Username: </label>
-          <input type="text" class="form-control" id="username" name="username">
-          {% for error in form.username.errors %}
-            <label class="control-label">{{ error }}</label>
-          {% endfor %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form action="{% url 'login' %}" method="post" role="form">
+                    {% csrf_token %}
+                    <div class="form-group{% if form.username.errors %} has-error{% endif %}">
+                        <label for="username">Username: </label>
+                        <input type="text" class="form-control" id="username" name="username">
+                        {% for error in form.username.errors %}
+                        <label class="control-label">{{ error }}</label>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group{% if form.password.errors %} has-error{% endif %}">
+                        <label for="password">Password: </label>
+                        <input type="password" class="form-control" id="password" name="password">
+                        {% for error in form.password.errors %}
+                        <label class="control-label">{{ error }}</label>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary center-block">Login</button>
+                        <p align="center"> Don't have an account with us? </p>
+                        <a href="{% url 'signup' %}" class="btn btn-default center-block">Sign up</a>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="form-group{% if form.password.errors %} has-error{% endif %}">
-          <label for="password">Password: </label>
-          <input type="password" class="form-control" id="password" name="password">
-          {% for error in form.password.errors %}
-            <label class="control-label">{{ error }}</label>
-          {% endfor %}
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary center-block">Login</button>
-            <p align="center"> Don't have an account with us? </p>
-          <a href="{% url 'signup' %}" class="btn btn-default center-block">Sign up</a>
-        </div>
-      </form>
     </div>
-  </div>
-        </div>
-        </div>
+</div>
 
 {% endblock %}
 
 {% block javascript %}
-
 
 <script type="text/javascript">
 {% if user.is_authenticated %}
@@ -118,4 +58,4 @@ $("ul.nav.navbar-nav.navbar-right").css("display","none");
 {% endif %}
 </script>
 
-        {% endblock %}
+{% endblock %}

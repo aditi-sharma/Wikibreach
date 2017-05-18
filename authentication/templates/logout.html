@@ -1,17 +1,11 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
-<style>
+<link rel="stylesheet" href="{% static '/css/authentication/login.css'%}">
 
-    .info{
-        text-align: center !important;
-        font-size: 20px !important;
-    }
-</style>
-
-    <div class="alert alert-danger alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+<div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <p align="center"> You have now Logged out. But you can still see all our posts! </p>
-        </div>
-    <div class="info"><a href="{% url 'posts' %}"> Click here to view all the posts </a></div>
+</div>
+<div class="info"><a href="{% url 'posts' %}"> Click here to view all the posts </a></div>
 {% endblock %}

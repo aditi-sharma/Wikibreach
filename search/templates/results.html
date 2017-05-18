@@ -1,28 +1,7 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<style>
-
-  h1 {
-    font-color: black !important;
-  }
-
-  .btn{
-    border-style: solid;
-    border: 1px;
-    border-color: black;
-    height: 35px;
-  }
-
-    h2 {
-    text-align: center !important;
-    font-color: #f2f !important;
-    font-size: 25px;
-  }
-
-
-</style>
-
-
+<link rel="stylesheet" href="{% static '/css/search/search.css'%}">
 <div class="container">
   <div class="page-header">
     <div class="row">
@@ -49,16 +28,16 @@
     </div>
     <div class="col-md-9" id="results">
       {% if active == 'google_alerts' %}
-        {% include 'partial_googleAlert_results.html' with results=results page_results=page_results %}
+      {% include 'partial_googleAlert_results.html' with results=results page_results=page_results %}
       {% elif active == 'privacy_rights_record' %}
-        {% include 'partial_privacyRights_results.html' with page_results=page_results %}
+      {% include 'partial_privacyRights_results.html' with page_results=page_results %}
       {% endif %}
       {% if page_results%}
-        {% include 'search_paginator.html' with paginator=page_results querystring=querystring active=active range=page_range %}
+      {% include 'search_paginator.html' with paginator=page_results querystring=querystring active=active range=page_range %}
       {% else %}
       <p align="center" style="font-size: 20px;">No posts were found :( </p>
       {% endif %}
     </div>
   </div>
-  </div>
+</div>
 {% endblock %}

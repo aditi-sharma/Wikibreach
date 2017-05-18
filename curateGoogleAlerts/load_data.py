@@ -1,3 +1,5 @@
+# __author__ = "Aditi Sharma"
+
 csv_filepath = "/Users/Aditi/CapstoneProject/WikiBreach/curateGoogleAlerts/Privacy_Rights_Clearinghouse-Data-Breaches-Export.csv"
 django_home = "/Users/Aditi/CapstoneProject/WikiBreach/"
 

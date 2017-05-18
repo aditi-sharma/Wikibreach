@@ -1,11 +1,9 @@
+# __author__ = "Aditi Sharma"
+
 from django.core.exceptions import ValidationError
-
-__author__ = "Aditi Sharma"
-
 from django import forms
 from datetime import datetime
 from django.core.validators import URLValidator
-
 from posts.models import Post
 
 
@@ -25,7 +23,7 @@ class PostForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         max_length=255, required=False)
     created_by_user = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),
-        max_length=25, required=False)
+                                      max_length=25, required=False)
 
     class Meta:
         model = Post
@@ -70,18 +68,15 @@ class UserPostForm(forms.ModelForm):
         max_length=25, required=False,
         help_text='Specify tags in double-quotes, and Use spaces to separate the tags, such as "data-breach ransomware"')
 
-
     class Meta:
         model = Post
         fields = ['title', 'content', 'source_url', 'breach_date', 'tags']
 
     def __init__(self, *args, **kwargs):
         super(UserPostForm, self).__init__(*args, **kwargs)
-        # self.fields['breach_date'].validators.append(DateValidator)
         self.fields['source_url'].validators.append(SourceUrlValidator)
         self.fields['source_url'].label = "Link to the Source"
         self.fields['breach_date'].label = "Date of Breach"
 
     def clean(self):
         super(UserPostForm, self).clean()
-

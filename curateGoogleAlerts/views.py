@@ -1,10 +1,10 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, JsonResponse
+# __author__ = "Aditi Sharma"
+
+from django.shortcuts import render
+from django.http import HttpResponse
 from django.http import QueryDict
 from oauth2client.contrib.django_util import decorators
 from django.views.decorators.csrf import csrf_protect
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import base64
 import json
 from bs4 import BeautifulSoup
@@ -15,10 +15,8 @@ from oauth2client import file, client, tools
 import email
 import pypwned
 
-
 # Create your views here.
 from posts.models import UserPost
-from curateGoogleAlerts.models import PrivacyRightsRecord
 
 
 def getBreaches(request):
@@ -32,6 +30,7 @@ def pwnedCheck(request):
 
 
 data = {}
+
 
 @decorators.oauth_required
 @csrf_protect
@@ -56,7 +55,8 @@ def get_profile_required(request):
             return HttpResponse("Error occured" + id + response)
     else:
         try:
-            response = GMAIL.users().messages().list(userId='wikibreach2017@gmail.com', q='googlealerts-noreply@google.com').execute()
+            response = GMAIL.users().messages().list(userId='wikibreach2017@gmail.com',
+                                                     q='googlealerts-noreply@google.com').execute()
             data2 = response['messages']
             for message in data2:
                 alert = []
@@ -82,15 +82,14 @@ def get_profile_required(request):
             return render(request, 'curation.html', {'messages': data, 'user_posts': user_posts})
         else:
             return render(request, 'curation.html', {'messages': data})
-        # paginator = Paginator(data.items(), 5)
-        # page = request.GET.get('page')
-        # try:
-        #     pages = paginator.page(page)
-        # except PageNotAnInteger:
-        #     pages = paginator.page(1)
-        # except EmptyPage:
-        #     pages = paginator.page(paginator.num_pages)
-
+            # paginator = Paginator(data.items(), 5)
+            # page = request.GET.get('page')
+            # try:
+            #     pages = paginator.page(page)
+            # except PageNotAnInteger:
+            #     pages = paginator.page(1)
+            # except EmptyPage:
+            #     pages = paginator.page(paginator.num_pages)
 
 
 @decorators.oauth_required

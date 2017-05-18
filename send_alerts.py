@@ -1,9 +1,8 @@
+# __author__ = "Aditi Sharma"
+
 from django.core.mail import EmailMultiAlternatives
-from django.http import HttpResponse
-
+from WikiBreach.settings import ADMIN_EMAIL
 from subscription.models import SubscribedUser
-
-__author__ = "Aditi Sharma"
 
 
 def send_email(title, slug):

@@ -1,5 +1,6 @@
+# __author__ = "Aditi Sharma"
+
 from django.core.mail import send_mail
-from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -22,7 +23,7 @@ def subscribe(request):
             return render(request, 'subscribed.html', {'exists': False, 'error': False, 'posts': all_posts})
         else:
             return render(request, 'subscribed.html', {'exists': False, 'error': True, 'posts': all_posts})
-    except Exception:
+    except Exception as E:
         return render(request, 'subscribed.html', {'exists': False, 'error': True, 'posts': all_posts})
 
 

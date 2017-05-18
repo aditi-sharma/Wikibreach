@@ -2,57 +2,7 @@
 {% load static %}
 
 {% block content %}
-
-
-<style>
-body {
-  margin: 80px;
-  background-color: #ececeb;
-  padding
-}
-
-h1 {
-    color: black;
-    letter-spacing: 2px;
-    font-family:Arial;
-    font-weight: 600;
-}
-
-h4 {
-    margin-top: 20px !important;
-    color:black;
-    font-family:Arial;
-}
-
-  .content {
-    margin-top: 30px !important;
-    font-size: 17px;
-    color: black;
-    font-family:Lucida Sans Unicode;
-    font-weight: 300;
-  }
-
-  .link{
-    text-align: right;
-    font-size: 15px;
-    font-family:Lucida Sans Unicode;
-    font-weight: 300;
-  }
-
-div.inline {
-    margin-top: 20px !important;
-    color:black;
-    font-family: Georgia;
-    font-size: 14px;
- }
-
- div.inline a {
-        font-family: Georgia;
-    font-size: 14px;
-    margin-left: 250px !important;
- }
-
-</style>
+<link rel="stylesheet" href="{% static '/css/posts/post.css'%}">
 {% if request.user.username == "Administrator" %}
 <a href="{% url 'delete' post.slug %}" class="btn btn-danger btn-md pull-right">
           <span class="glyphicon glyphicon-trash"></span> Delete Post

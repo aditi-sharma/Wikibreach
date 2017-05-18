@@ -1,14 +1,9 @@
-<style>
-  h2{
-    font-weight: bold;
-    text-decoration: underline;
-    font-family: Arial Black;
-  }
-
-</style>
-
+{% load static %}
+<link rel="stylesheet" href="{% static '/css/search/search.css'%}">
 {% if results %}
+<div class="inline">
 <h2>Posts on WikiBreach</h2>
+</div>
   <ul class="post-results">
     {% for post in results %}
       <li post-slug="{{ post.slug }}">

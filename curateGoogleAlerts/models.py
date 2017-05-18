@@ -1,3 +1,5 @@
+# __author__ = "Aditi Sharma"
+
 import markdown
 from django.db import models
 from oauth2client.contrib.django_util.models import CredentialsField
@@ -50,7 +52,6 @@ class PrivacyRightsRecord(models.Model):
 
     def get_breach_date(self):
         return self.date_made_public
-
 
 
 class CredentialsModel(models.Model):

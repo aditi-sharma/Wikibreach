@@ -1,3 +1,5 @@
+# __author__ = "Aditi Sharma"
+
 from django.conf.urls import url
 from posts import views
 

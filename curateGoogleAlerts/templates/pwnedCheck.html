@@ -1,161 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<style>
-
-    h3 {
-    color: black;
-    text-align: center;
-    font-family: Arial Black;
-    }
-
-    input[type=text]{
-    border: 1px solid black;
-    text-align: center;
-    }
-
-
-    .resultTitle{
-    color: white;
-    background-color: green;
-    text-align: center;
-    font-family: Lucida Sans Unicode;
-    font-weight: 300;
-    font-size: 20px;
-    }
-
-    .pwnedTitle{
-    color: white;
-    background-color: red;
-    text-align: center;
-    font-family: font-family:Lucida Sans Unicode;
-    font-weight: 300;
-    font-size: 20px;
-    }
-
-    .courtesy{
-    color: black;
-    font-family: Lucida Sans Unicode;
-    }
-
-    .breachResult{
-    color: black;
-    text-align: left !important;
-    font-family: Arial;
-    }
-
-</style>
-
+{% load static %}
+<link rel="stylesheet" href="{% static '/css/curateGoogleAlerts/pwnedCheck.css'%}">
 <h3> Has your email account been compromised as part of a cyber breach ? </h3>
 <br/>
 <div class="container" align="center">
-<form class="form-horizontal"> {% csrf_token %}
-<div class="input-group">
-   <input type="text" class="form-control" placeholder="Enter your email address here" id="email">
-   <span class="input-group-btn">
+    <form class="form-horizontal"> {% csrf_token %}
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter your email address here" id="email">
+            <span class="input-group-btn">
         <button class="btn btn-warning btn-md" type="button" id="button">Find Breaches</button>
    </span>
-</div>
-</form>
+        </div>
+    </form>
     <div class="courtesy" align="right">(Powered By: <a href="https://haveibeenpwned.com/" target="_blank">https://haveibeenpwned.com/</a> )
     </div>
- <br/> <br/>
-<div class="resultTitle">
-</div>
-<div class="pwnedTitle">
-</div>
-<div class="breachResult">
-</div>
+    <br/> <br/>
+    <div class="resultTitle">
     </div>
- <script type ="text/javascript">
-     $("#button").click(function(e) {
-        // do NOT submit the form as a regular POST request
-        email = $('input:text').val()
-        e.preventDefault();
-        if (validateEmail(email)){
-             $.ajax({
-            type: 'GET',
-            url: '/getBreaches/',
-            data: {'account': email},
-            dataType: 'text',
-            success: function(response) {
-               if (response.indexOf("404 - Not found")> -1){
-                    $(".resultTitle").show();
-                    $(".resultTitle").html("Good news — We found no breaches on your account");
-                    $(".pwnedTitle").hide();
-                    $(".breachResult").hide();
-                    }
-               else {
-                var arr = JSON.parse(response);
-                $(".resultTitle").hide();
-                 $(".pwnedTitle").show();
-                $(".pwnedTitle").html("Oh no! you have been Pwned!");
-                $(".breachResult").show();
-                var out = "<h4>Please see the details below:</h4>" + "<div class=\"breachEntries\">";
-for(i = 0; i < arr.length; i++) {
-        out += "<div class=\"breachEntry\" id=\"breachEntry" + i + "\"><div class=\"breachDomain\"><strong>Domain of Breach:&nbsp;</strong>" + arr[i].Name +
-        "&nbsp;(<a href=\"http://" + arr[i].Domain + "\" target=\"_blank\"><strong>http://" + arr[i].Domain + "</a></strong>):&nbsp;" +
-        "</div><div class=\"breachDesc\">" +
-        arr[i].Description +
-        "</div><div class=\"breachItems\"><strong>Breached Items:&nbsp;</strong>" +
-        arr[i].DataClasses +
-         "</div><div class=\"breachCount\"><strong>Total number of accounts breached:&nbsp;</strong>" +
-        arr[i].PwnCount +
-        "</div><div class=\"breachDate\"><strong>Breach Date:&nbsp;</strong>" +
-        arr[i].BreachDate +
-        "</div></div><hr>";
-        }
-    out += "</div>";
-                $(".breachResult").html(out);
-                }
-             },
-            fail : function() {
-                alert(" NOT DONE");
-            },
-            error : function(xhr,errmsg,err) {
-            alert(errmsg);
-            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-        }
-     });
-        }
-        else {
-            alert("Please enter a valid email address");
-        }
-     });
-
-    function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-   }
-   var csrftoken = getCookie('csrftoken');
-
-    function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-
-   $(document).ajaxSend(function(event, xhr, settings){
-    if (!csrfSafeMethod(settings.type)) {
-        xhr.setRequestHeader("X-CSRFToken", csrftoken);
-
-    }
-});
-
-function validateEmail(elementValue){
-   var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-   return emailPattern.test(elementValue);
- }
-
-</script>
-     {% endblock %}
+    <div class="pwnedTitle">
+    </div>
+    <div class="breachResult">
+    </div>
+</div>
+<script src="{% static '/js/pwnedCheck.js'%}"></script>
+<script src="{% static '/js/base.js'%}"></script>
+{% endblock %}

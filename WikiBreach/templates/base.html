@@ -1,323 +1,108 @@
 {% load static %}
 <html lang="en">
 <head>
-  <!-- Theme Made By www.w3schools.com - No Copyright -->
-  <title>WikiBreach</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Theme Made By www.w3schools.com - No Copyright -->
+    <title>WikiBreach</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{% static '/js/base.js'%}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <style>
-  body {
-      font: 400 15px Lato, sans-serif;
-      line-height: 1.8;
-      color: #818181;
-  }
-  h2 a{
-      font-size: 19px;
-      color: #feb22f;
-      font-weight: 600;
-      margin-bottom: 30px;
-  }
-
-  h4 {
-      font-size: 15px;
-      line-height: 1.375em;
-      color: #fff;
-      font-weight: 400;
-      margin-bottom: 7px;
-  }
-  .jumbotron {
-      background-color: #fff;
-      color: #fff;
-      padding: 100px 25px;
-      font-family: Montserrat, sans-serif;
-  }
-  .container-fluid {
-      padding: 60px 50px;
-  }
-  .bg-grey {
-      background-color: #f6f6f6;
-  }
-  .thumbnail {
-      padding: 0 0 15px 0;
-      border: none;
-      border-radius: 0;
-  }
-
-  .navbar {
-      position: absolute;
-      margin-bottom: 10px;
-      background-color: #000;
-      z-index: -1;
-      border: 0;
-      font-size: 12px !important;
-      line-height: 3 !important;
-      letter-spacing: 3px;
-      border-radius: 0;
-      font-family: Liberation, sans-serif;
-      margin-top: 35px;
-      min-height: 40px;
-  }
-
-  .logo {
-      position: absolute;
-      // Use your own values for anything below this line.
-      z-index: 9999;
-      left: 35px;
-      top: 6px;
-      width: 300px;
-  }
-  .navbar li a, .navbar .navbar-brand {
-      color: #fff !important;
-      margin-top: 0px;
-      padding-top:10px !important;
-      padding-bottom:10px !important;
-  }
-
-  .navbar-nav li a:hover, .navbar-nav li.active a {
-      color: #f4511e !important;
-      background-color: #fff !important;
-  }
-  .navbar-default .navbar-toggle {
-      border-color: transparent;
-      color: #fff !important;
-  }
-
-  .navbar-inverse {
-      margin-bottom: 0px;
-      background-color: #feb22f;
-      font-size: 13px !important;
-      letter-spacing: 2px;
-      font-weight: bold;
-      font-family: Liberation, sans-serif;
-      margin-top: 80px;
-  }
-
-    .navbar-inverse li a, .navbar-inverse li {
-      color: #000 !important;
-      margin-top: 0px;
-      padding-top:5px !important;
-      padding-bottom:5px !important;
-      margin-right: 5px;
-      margin-left: 0px;
-  }
-
-   .navbar-inverse li p {
-         margin-left: 32px !important;
-   }
-
-   .glyphicon-search {
-    padding-bottom: 5px !important;
-   }
-
-
-  .caret {
-    margin-top: 7px !important;
-    margin-left: 0px !important;
-  }
-
-  .footer {
-      font-size: 20px;
-      min-height: 100px;
-      background-color: #000;
-      width: 100%;
-  }
-
-  .input-group {
-    padding-right: 6px;
-    padding-left: 16px;
-}
-
-  .slideanim {visibility:hidden;}
-  .slide {
-      animation-name: slide;
-      -webkit-animation-name: slide;
-      animation-duration: 1s;
-      -webkit-animation-duration: 1s;
-      visibility: visible;
-  }
-  @keyframes slide {
-    0% {
-      opacity: 0;
-      transform: translateY(70%);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0%);
-    }
-  }
-  @-webkit-keyframes slide {
-    0% {
-      opacity: 0;
-      -webkit-transform: translateY(70%);
-    }
-    100% {
-      opacity: 1;
-      -webkit-transform: translateY(0%);
-    }
-  }
-  @media screen and (max-width: 768px) {
-    .col-sm-4 {
-      text-align: center;
-      margin: 25px 0;
-    }
-    .btn-lg {
-        width: 100%;
-        margin-bottom: 35px;
-    }
-  }
-  @media screen and (max-width: 480px) {
-    .logo {
-        width: 50px;
-    }
-  }
-  </style>
+    <link rel="stylesheet" href="{% static '/css/base.css'%}">
 </head>
 
 <body id="myPage">
 <a class="logo" href="{% url 'posts'%}"> <img src="{% static '/images/logo.png' %}" width="300" height="70"></a>
 <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
 
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="{% url 'posts'%}">Home</a></li>
-        <li><a href="{% url 'aboutUs'%}">About Us</a></li>
-        <li><a href="{% url 'contactUs'%}">Contact Us</a></li>
-        <li><a href="{% url 'contribute'%}">Be a Contributor</a></li>
-      </ul>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'posts'%}">Home</a></li>
+                <li><a href="{% url 'aboutUs'%}">About Us</a></li>
+                <li><a href="{% url 'contactUs'%}">Contact Us</a></li>
+                <li><a href="{% url 'contribute'%}">Be a Contributor</a></li>
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
 
 <nav class="navbar-inverse">
     <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar2">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-    <div class="collapse navbar-collapse navbar2" id="myNavbar2">
-      <ul class="nav navbar-nav">
-        <li><a href="{% url 'pwnedCheck' %}"> Have you been breached? Click to Find out </a></li>
-      </ul>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar2">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse navbar2" id="myNavbar2">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'pwnedCheck' %}"> Have you been breached? Click to Find out </a></li>
+            </ul>
 
-      <ul class="nav navbar-nav navbar-right">
-          <li><a class="btn btn-default" href="{% url 'search'%}"><span class="glyphicon glyphicon-search">&nbsp; Search</span></a></li>
-        {% if request.user.is_authenticated %}
-          <li><p>{{request.user.username}}</p></li>
-          <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    {% if request.user.username == "Administrator" %}
-                    <li><a href="{% url 'getAlerts' %}">Curate google alerts/user posts</a></li>
-                    {% endif %}
-                    <li><a href="{% url 'logout' %}">Log Out</a></li>
-                </ul>
-              </li>
-              {% else %}
-          <li><a href="{% url 'login' %}">Login</a></li>
-          <li><a href="{% url 'signup' %}">Sign Up</a></li>
-          {% endif %}
-      </ul>
-    </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="btn btn-default" href="{% url 'search'%}"><span class="glyphicon glyphicon-search">&nbsp; Search</span></a></li>
+                {% if request.user.is_authenticated %}
+                <li><p>{{request.user.username}}</p></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        {% if request.user.username == "Administrator" %}
+                        <li><a href="{% url 'getAlerts' %}">Curate google alerts/user posts</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'logout' %}">Log Out</a></li>
+                    </ul>
+                </li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 </nav>
 <br/><br/>
- {% block content %}
+{% block content %}
 {% endblock%}
 <br/><br/>
 <div class="footer">
-  <div class="container" align="left" role="navigation">
-      <div class="row">
-    <form class="form-inline" method="post" role="form" id="subscribeForm" action="{% url 'subscribe'%}">
-  {% csrf_token %} {{ form.errors }}
-{{ form.non_field_errors }}
-          <div class="col-md-4">
-        <h4> Subscribe to breach updates: </h4>
-        <div class="form-group">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
-          <input type="text" class="form-control input-sm" name="email" id="email"  placeholder="Enter your Email"/>
+    <div class="container" align="left" role="navigation">
+        <div class="row">
+            <form class="form-inline" method="post" role="form" id="subscribeForm" action="{% url 'subscribe'%}">
+                {% csrf_token %} {{ form.errors }}
+                {{ form.non_field_errors }}
+                <div class="col-md-4">
+                    <h4> Subscribe to breach updates: </h4>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control input-sm" name="email" id="email"  placeholder="Enter your Email"/>
+                        </div>
+                        <button type="submit" class="btn btn-default btn-sm" style="background-color:#428bca;color:white;">Subscribe</button>
+                    </div>
+                </div>
+            </form>
+            <div class="col-md-6">
+                <h4 align="center"> Powered By:</h4>
+                <div class="footer_link" align="center" style="font-size: 17px;"> <a href="https://www.summersco.us/#welcome" target="_blank" style="color:#feb22f;">Summers & Company </a> <h4 style="display:inline;"> and  </h4><a href="https://twitter.com/HowHackersThink" target="_blank" style="color:#feb22f;"> @HowHackersThink</a></div>
+            </div>
+            <div class="col-md-2">
+                <span class="inline"> <h4 align="right">Follow us: &nbsp; <a href="https://twitter.com/HowHackersThink" target="_blank"><button class="btn btn-social-icon btn-twitter" style="background-color:white; display: inline-block;"> <i class="fa fa-twitter" style="font-size:20px"></i></button></a> </h4></span>
+            </div>
         </div>
-          <button type="submit" class="btn btn-default btn-sm" style="background-color:#428bca;color:white;">Subscribe</button>
-        </div>
-      </div>
-    </form>
-      <div class="col-md-6">
-      <h4 align="center"> Powered By:</h4>
-          <div class="footer_link" align="center" style="font-size: 17px;"> <a href="https://www.summersco.us/#welcome" target="_blank" style="color:#feb22f;">Summers & Company </a> <h4 style="display:inline;"> and  </h4><a href="https://twitter.com/HowHackersThink" target="_blank" style="color:#feb22f;"> @HowHackersThink</a></div>
-      </div>
-      <div class="col-md-2">
-      <span class="inline"> <h4 align="right">Follow us: &nbsp; <a href="https://twitter.com/HowHackersThink" target="_blank"><button class="btn btn-social-icon btn-twitter" style="background-color:white; display: inline-block;"> <i class="fa fa-twitter" style="font-size:20px"></i></button></a> </h4></span>
-      </div>
-  </div>
-  </div>
     </div>
-<script>
-$(document).ready(function(){
-  // Add smooth scrolling to all links in navbar + footer link
-  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
-    // Make sure this.hash has a value before overriding default behavior
-    if (this.hash !== "") {
-      // Prevent default anchor click behavior
-      event.preventDefault();
-
-      // Store hash
-      var hash = this.hash;
-
-      // Using jQuery's animate() method to add smooth page scroll
-      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 900, function(){
-
-        // Add hash (#) to URL when done scrolling (default click behavior)
-        window.location.hash = hash;
-      });
-    } // End if
-  });
-
-  $(window).scroll(function() {
-    $(".slideanim").each(function(){
-      var pos = $(this).offset().top;
-
-      var winTop = $(window).scrollTop();
-        if (pos < winTop + 600) {
-          $(this).addClass("slide");
-        }
-    });
-  });
-})
-
-$( "#subscribeForm" ).submit(function() {
-   elementValue = $('#email').val();
-   var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-   if(emailPattern.test(elementValue)){
-        return true;
-        }
-   else {
-        alert("You have entered an invalid email address. \n Please enter a valid email address to subscribe");
-        return false;
-   }
-});
-</script>
-        {% block javascript %}
-
-            </body>
-        </html>
-{% endblock%}
+</div>
+</body>
+</html>

@@ -1,200 +1,63 @@
 {% extends 'base.html' %}
 {% load static %}
-
-
-<html lang="en">
-<head>
-<style>
-
-table {
-  border-collapse:separate;
-  border-spacing:10px 10px;
-}​​​​​​​​​​​​​
-
-.table-hover {
-    background-color: grey;
-}
-
-td {
-   padding-bottom: 10px !important;
-   padding-top: 10px !important;
-   width: 70%;
-}
-
-.loadingmessage {
-	position: fixed;
-	left: 0px;
-	top: 0px;
-	width: 100% !important;
-	height: 100% !important;
-	z-index: 9999 !important;
-	background: url('images/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
-	-webkit-transition: all .5s ease;;
-	background-position: center !important;
-    background-repeat: no-repeat;
-}
-
-
-.btn {
-        margin-top: 3px !important;
-        height: 33px;
-        margin-bottom: 3px !important;
-        margin-left: 0px !important;
-
-}
-
- .with-nav-tabs> .nav nav-tabs > li.active > a{
-    background-color:black !important;
-    color:#feb22f !important;
-}
-
-</style>
-</head>
 {% block content %}
- <body>
- <div id='loadingmessage' style='display:none'>
-  <img src="{% static '/images/ajax-loader.gif' %}"/>
-</div>
+<link rel="stylesheet" href="{% static '/css/curateGoogleAlerts/curation.css'%}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
 <div class="container">
     <div class="with-nav-tabs">
-    <ul class="nav nav-tabs" id="myTab" data-tabs="tabs">
-        <li class="active"><a data-toggle="tab" href="#alerts" style="background-color:black;color:#feb22f;">Google Alerts</a></li>
-        <li><a data-toggle="tab" href="#userposts" style="background-color:#feb22f; color:black;">User Submitted Posts</a></li>
-    </ul>
+        <ul class="nav nav-tabs" id="myTab" data-tabs="tabs">
+            <li class="active"><a data-toggle="tab" href="#alerts" style="background-color:black;color:#feb22f;">Google Alerts</a></li>
+            <li><a data-toggle="tab" href="#userposts" style="background-color:#feb22f; color:black;">User Submitted Posts</a></li>
+        </ul>
     </div>
     <div class="tab-content">
-      <div id="alerts" class="tab-pane fade in active">
-          <form class="form-inline"> {% csrf_token %}
-              <div class="table-responsive table-bordered">
-                  <table class="table">
-                      {% with count=0 %}
-                      {% for key,value in messages.items %}
-                      <tr id={{key}}>
-                          <td> {{ value.0 }} <br/>
-                              <a href= {{ value.1 }} target="_blank"> View full news </a>
-                              <button type="button" id ="deleteAlert_{{forloop.counter0|add:count}}" value={{key}} class="btn btn-danger btn-sm pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                              <a href="{% url 'createPost' key %}"><button type="button" id ="acceptAlert_{{forloop.counter0|add:count}}" value="Accept" class="btn btn-success btn-sm pull-right"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></a>
-                          </td>
-                      </tr>
-                      {% endfor %}
-                      {% endwith %}
-                  </table>
-              </div>
-          </form>
-      </div>
+        <div id="alerts" class="tab-pane fade in active">
+            <form class="form-inline"> {% csrf_token %}
+                <div class="table-responsive table-bordered">
+                    <table class="table">
+                        {% with count=0 %}
+                        {% for key,value in messages.items %}
+                        <tr id={{key}}>
+                            <td> {{ value.0 }} <br/>
+                                <a href= {{ value.1 }} target="_blank"> View full news </a>
+                                <button type="button" id ="deleteAlert_{{forloop.counter0|add:count}}" value={{key}} class="btn btn-danger btn-sm pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                <a href="{% url 'createPost' key %}"><button type="button" id ="acceptAlert_{{forloop.counter0|add:count}}" value="Accept" class="btn btn-success btn-sm pull-right"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endwith %}
+                    </table>
+                </div>
+            </form>
+        </div>
         <div id="userposts" class="tab-pane fade">
-         {% if user_posts %}
-          <form class="form-inline"> {% csrf_token %}
-              <div class="table-responsive table-bordered">
-                  <table class="table">
-                      {% with count=0 %}
-                      {% for post in user_posts %}
-                      <tr id={{post.id}}>
-                          <td>  <p style="color:black;"> Submitted By: <strong>{{post.create_user.username}}</strong> </p>
-                              <p>{{ post.title }} </p>
-                              <a href= {{post.source_url}} target="_blank"> View provided source link </a>
-                              <button type="button" id="deletePost_{{forloop.counter0|add:count}}" class="btn btn-danger btn-sm pull-right" value={{post.id}}><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                              <a href="{% url 'createUserPost' post.id %}"><button type="button" id ="acceptPost_{{forloop.counter0|add:count}}" value="Accept" class="btn btn-success btn-sm pull-right"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></a>
-                          </td>
-                      </tr>
-                      {% endfor %}
-                      {% endwith %}
-                  </table>
-              </div>
-          </form>
-          {% else %}
-         <p> There are no user submitted posts </p>
-          {% endif %}
-      </div>
-      </div>
+            {% if user_posts %}
+            <form class="form-inline"> {% csrf_token %}
+                <div class="table-responsive table-bordered">
+                    <table class="table">
+                        {% with count=0 %}
+                        {% for post in user_posts %}
+                        <tr id={{post.id}}>
+                            <td>  <p style="color:black;"> Submitted By: <strong>{{post.create_user.username}}</strong> </p>
+                                <p>{{ post.title }} </p>
+                                <a href= {{post.source_url}} target="_blank"> View provided source link </a>
+                                <button type="button" id="deletePost_{{forloop.counter0|add:count}}" class="btn btn-danger btn-sm pull-right" value={{post.id}}><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                <a href="{% url 'createUserPost' post.id %}"><button type="button" id ="acceptPost_{{forloop.counter0|add:count}}" value="Accept" class="btn btn-success btn-sm pull-right"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endwith %}
+                    </table>
+                </div>
+            </form>
+            {% else %}
+            <p> There are no user submitted posts </p>
+            {% endif %}
+        </div>
+    </div>
 </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
-            <script type ="text/javascript">
-     $('[id^=deleteAlert]').unbind().click(function(e) {
-        // do NOT submit the form as a regular POST request
-        e.preventDefault();
-        <!--$('#loadingmessage').show();-->
-        message_id = $(this).attr('value');
-        $.ajax({
-            type: 'POST',
-            url: '/getAlerts/',
-            data: {'id': message_id},
-            success: function() {
-                <!--$('#loadingmessage').hide();-->
-                alert('Message deleted!');
-                $('#'+message_id).remove();
-             },
-            fail : function() {
-                alert('Unable to delete the message. Please reload page and try again!');
-                <!--$('#loadingmessage').hide();-->
-            },
-            error : function(xhr,errmsg,err) {
-            alert('Unable to delete the message. Please reload page and try again!');
-            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-        }
-                });
-     });
-
-     $('[id^=deletePost]').unbind().click(function(e) {
-        // do NOT submit the form as a regular POST request
-        e.preventDefault();
-        id = $(this).attr('value');
-        $.ajax({
-            type: 'POST',
-            url: '/rejectUserPost/',
-            data: {'id': id},
-            success: function() {
-                alert('User Post deleted!');
-                $('#'+id).remove();
-             },
-            fail : function() {
-                alert('Unable to delete the user post. Please reload page and try again!');
-            },
-            error : function(xhr,errmsg,err) {
-            alert('Unable to delete the user post. Please reload page and try again!');
-            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-        }
-                });
-     });
-
-
-    $(window).load(function() {
-		// Animate loader off screen
-		$(".loadingmessage").fadeOut("slow");
-	});
-
-    function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-   }
-   var csrftoken = getCookie('csrftoken');
-
-    function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-
-   $(document).ajaxSend(function(event, xhr, settings){
-    if (!csrfSafeMethod(settings.type)) {
-        xhr.setRequestHeader("X-CSRFToken", csrftoken);
-
-    }
-});
-
-
-</script>
-
-  {% endblock %}
- </body> </html>
+<script src="{% static '/js/curation.js'%}"></script>
+<script src="{% static '/js/base.js'%}"></script>
+{% endblock %}

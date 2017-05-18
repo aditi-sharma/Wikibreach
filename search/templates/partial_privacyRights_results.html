@@ -1,34 +1,8 @@
-<style>
-  strong {
-    font-color: #feb22f; !important;
-    font-size: 15px !important;
-    font-family: Lucida Sans Unicode;
-
-  }
-
-  .title{
-     color: black;
-    font-family: Arial;
-    font-size: 20px !important;
-
-  }
-
-  h2{
-    font-weight: bold;
-    text-decoration: underline;
-    font-family: Arial Black;
-  }
-
-    h5{
-   font-weight: bold;
-   font-size: 20px !important;
-  }
-
-</style>
-
+{% load static %}
+<link rel="stylesheet" href="{% static '/css/search/search.css'%}">
 {% if page_results %}
 <div class="inline">
-  <a href="https://www.privacyrights.org/data-breaches" target="_blank"><h2>Privacy Rights ClearingHouse Results  </h2></a>
+  <h2>Privacy Rights ClearingHouse Results  </h2>
 </div>
     {% for PrivacyRightsRecord in page_results %}
 <ul class="result">

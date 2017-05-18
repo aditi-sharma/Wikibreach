@@ -1,0 +1,48 @@
+  .inline > h2{
+    font-weight: bold;
+    text-decoration: underline;
+    font-family: Arial Black;
+     color: #feb22f !important;
+     text-align: center;
+  }
+
+  strong {
+    font-color: #feb22f !important;
+    font-size: 15px !important;
+    font-family: Lucida Sans Unicode;
+
+  }
+
+  .title{
+     color: black;
+    font-family: Arial;
+    font-size: 20px !important;
+
+  }
+
+    h5{
+   font-weight: bold;
+   font-size: 20px !important;
+  }
+
+  .list-group{
+        width: 100% !important;
+    }
+
+    .active{
+        color: #feb22f !important;
+        background-color: black !important;
+    }
+
+    h1 {
+    font-color: black !important;
+    text-align: center !important;
+  }
+
+  .btn{
+    border-style: solid;
+    border: 1px;
+    border-color: black;
+    height: 35px;
+  }
+

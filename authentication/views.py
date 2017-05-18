@@ -1,6 +1,7 @@
+# __author__ = "Aditi Sharma"
+
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -41,7 +42,7 @@ def log_in(request):
             form = LoginForm(request.POST)
             if not form.is_valid():
                 return render(request, 'login.html',
-                          {'form': form})
+                              {'form': form})
             else:
                 username = form.cleaned_data.get('username')
                 password = form.cleaned_data.get('password')

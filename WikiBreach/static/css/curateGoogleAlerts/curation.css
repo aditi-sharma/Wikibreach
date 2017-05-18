@@ -1,0 +1,28 @@
+table {
+  border-collapse:separate;
+  border-spacing:10px 10px;
+}​​​​​​​​​​​​​
+
+.table-hover {
+    background-color: grey;
+}
+
+td {
+   padding-bottom: 10px !important;
+   padding-top: 10px !important;
+   width: 70%;
+}
+
+
+.btn {
+        margin-top: 3px !important;
+        height: 33px;
+        margin-bottom: 3px !important;
+        margin-left: 0px !important;
+
+}
+
+ .with-nav-tabs> .nav nav-tabs > li.active > a{
+    background-color:black !important;
+    color:#feb22f !important;
+}

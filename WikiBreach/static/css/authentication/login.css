@@ -1,0 +1,63 @@
+.panel-heading{
+    width: 50%;
+    background-color: black !important;
+    color: white !important;
+    font-weight: bold;
+    font-size: 24px !important;
+  }
+
+  .panel-default{
+    border: 3px;
+    border-color: black;
+    border-style: solid;
+  }
+
+  label{
+    color: black !important;
+  }
+
+  .form-control{
+    border: 1px;
+    border-color: black;
+    border-style: solid;
+  }
+
+  .btn-primary {
+    background-color: #feb22f;
+    color: black;
+    width: 100%;
+    border: 1px;
+    border-color: black;
+    border-style: solid;
+  }
+
+  .btn-primary:hover{
+    background-color: black;
+    color: #feb22f;
+    width: 100%;
+    border: 1px;
+    border-color: black;
+    border-style: solid;
+  }
+
+  .panel-body .btn-default{
+    background-color: white;
+    color: black;
+    width: 100%;
+    border: 0.5px;
+    border-color: black;
+    border-style: solid;
+  }
+
+
+  p {
+    color: black !important;
+    font-size: 15px !important;
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+  }
+
+  .info{
+        text-align: center !important;
+        font-size: 20px !important;
+    }

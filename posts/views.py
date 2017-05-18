@@ -1,3 +1,5 @@
+# __author__ = "Aditi Sharma"
+
 from http import client
 from django.db import Error
 
@@ -115,7 +117,7 @@ def publishPost(request, id):
             tags = form.cleaned_data.get('tags')
             post.create_tags(tags)
             breach_alert = get_object_or_404(Post, title=post.title, breach_date=post.breach_date)
-            # send_email(breach_alert.title, breach_alert.slug)
+            send_email(breach_alert.title, breach_alert.slug)
             if id:
                 deleteGoogleAlert(request, id)
             return redirect('post', slug=breach_alert.slug)

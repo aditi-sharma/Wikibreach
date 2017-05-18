@@ -1,50 +1,8 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-<style>
+<link rel="stylesheet" href="{% static '/css/posts/post.css'%}">
 
-  .panel-heading{
-    width: 100%;
-    background-color: black !important;
-    color: white !important;
-    font-weight: bold;
-    font-size: 30px !important;
-    text-align: center;
-    font-family: Arial Black;
-    letter-spacing: 1px;
-  }
-
-  .panel-default{
-  border: 3px;
-    border-color: black;
-    border-style: solid;
-  }
-
-  label{
-    color: black !important;
-  }
-
-  .btn-primary {
-    background-color: #feb22f;
-    color: black;
-    width: 100%;
-  }
-
-  .btn-primary:hover{
-    background-color: black;
-    color: #feb22f;
-    width: 100%;
-  }
-
-  p {
-    color: black !important;
-    font-size: 15px !important;
-  }
-
-    .control-label{
-        color:red;
-    }
-</style>
   {% if request.user.is_authenticated %}
     {% if post_success%}
         <div class="alert alert-success alert-dismissable">
