@@ -34,7 +34,7 @@ data = {}
 
 @decorators.oauth_required
 @csrf_protect
-def get_profile_required(request):
+def get_google_alerts(request):
     try:
         store = file.Storage('WikiBreach/gmail.json')
         creds = store.get()
@@ -82,61 +82,11 @@ def get_profile_required(request):
             return render(request, 'curation.html', {'messages': data, 'user_posts': user_posts})
         else:
             return render(request, 'curation.html', {'messages': data})
-            # paginator = Paginator(data.items(), 5)
-            # page = request.GET.get('page')
-            # try:
-            #     pages = paginator.page(page)
-            # except PageNotAnInteger:
-            #     pages = paginator.page(1)
-            # except EmptyPage:
-            #     pages = paginator.page(paginator.num_pages)
 
 
 @decorators.oauth_required
 @csrf_protect
-def authorize(request):
-    try:
-        store = file.Storage('WikiBreach/gmail.json')
-        creds = store.get()
-        if not creds or creds.invalid:
-            flow = client.flow_from_clientsecrets('WikiBreach/client_secret.json',
-                                                  'https://mail.google.com/')
-            creds = tools.run_flow(flow, store)
-        GMAIL = discovery.build('gmail', 'v1', http=creds.authorize(Http()))
-    except errors.HttpError as error:
-        print('An error occurred: %s' % error)
-
-    try:
-        id = QueryDict(request.body).get('id')
-        message_body = GMAIL.users().messages().get(userId='wikibreach2017@gmail.com', id=id).execute()
-        data = message_body['payload']
-        msg = data['parts']
-        part = msg[1]
-        body = part['body']
-        dat = body['data']
-        msg_str = base64.urlsafe_b64decode(dat.encode('UTF-8'))
-        soup = BeautifulSoup(msg_str)
-        d = str(soup.find_all("script"))
-        m = []
-        m = d.split("type=\"application/json\">", 1)
-        p = m[1].split("</script>]", 1)
-        msg_json = str(p[0])
-        data2 = json.loads(msg_json)
-        date = data2['entity']['subtitle']
-        keyword = str(data2['entity']['title']).split("Google Alert - ")[1]
-        widgets = data2["cards"][0]
-        widgets = widgets['widgets'][0]
-        title = widgets['title']
-        description = widgets['description']
-        sendData = {"title": title, "date": date, "keyword": keyword, "description": description}
-        return HttpResponse(json.dumps(sendData))
-    except errors.HttpError as error:
-        print('An error occurred: %s' % error)
-
-
-@decorators.oauth_required
-@csrf_protect
-def deleteGoogleAlert(request, id):
+def delete_google_alert(request, id):
     global GMAIL
     try:
         store = file.Storage('WikiBreach/gmail.json')

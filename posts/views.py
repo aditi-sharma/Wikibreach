@@ -19,7 +19,7 @@ from oauth2client import file, client, tools
 from dateutil import parser
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
-from curateGoogleAlerts.views import deleteGoogleAlert
+from curateGoogleAlerts.views import delete_google_alert
 from posts.forms import UserPostForm, PostForm
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -51,9 +51,10 @@ def post(request, slug):
     post = get_object_or_404(Post, slug=slug)
     return render(request, 'post.html', {'post': post})
 
+
 @decorators.oauth_required
 @csrf_protect
-def createPost(request, id):
+def create_post(request, id):
     global GMAIL
     try:
         store = file.Storage('WikiBreach/gmail.json')
@@ -99,7 +100,7 @@ def createPost(request, id):
 
 
 @login_required
-def publishPost(request, id):
+def publish_post(request, id):
     form = PostForm(request.POST)
     if form.is_valid():
         post = Post()
@@ -119,7 +120,7 @@ def publishPost(request, id):
             breach_alert = get_object_or_404(Post, title=post.title, breach_date=post.breach_date)
             send_email(breach_alert.title, breach_alert.slug)
             if id:
-                deleteGoogleAlert(request, id)
+                delete_google_alert(request, id)
             return redirect('post', slug=breach_alert.slug)
         except Error:
             return HttpResponse(Error)
@@ -145,7 +146,7 @@ def tag(request, tag_name):
     })
 
 
-def editPost(request, slug):
+def edit_post(request, slug):
     tags = []
     post = get_object_or_404(Post, slug=slug)
     for tag in post.get_tags():
@@ -155,7 +156,7 @@ def editPost(request, slug):
     return render(request, 'editPost.html', {'post': post, 'tags': tagString, 'date': date})
 
 
-def updatePost(request, slug):
+def update_post(request, slug):
     if request.POST:
         post = get_object_or_404(Post, slug=slug)
         form = PostForm(request.POST, instance=post)
@@ -166,7 +167,7 @@ def updatePost(request, slug):
             return HttpResponse("Error occurred")
 
 
-def deletePost(request, slug):
+def delete_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
     post.delete()
     return redirect('/posts/')

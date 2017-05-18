@@ -27,7 +27,7 @@ def subscribe(request):
         return render(request, 'subscribed.html', {'exists': False, 'error': True, 'posts': all_posts})
 
 
-def contactUs(request):
+def contact_us(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         try:
@@ -47,5 +47,5 @@ def contactUs(request):
         return render(request, 'contactUs.html', {'form': ContactForm()})
 
 
-def aboutUs(request):
+def about_us(request):
     return render(request, 'aboutUs.html')
