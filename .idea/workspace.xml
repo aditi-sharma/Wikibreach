@@ -3,52 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="41f01a8f-d165-4e7e-830e-750ee3a6779e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WikiBreach/gmail.json" afterPath="$PROJECT_DIR$/WikiBreach/gmail.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WikiBreach/static/css/authentication/login.css" afterPath="$PROJECT_DIR$/WikiBreach/static/css/authentication/login.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WikiBreach/static/css/base.css" afterPath="$PROJECT_DIR$/WikiBreach/static/css/base.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WikiBreach/static/css/curateGoogleAlerts/curation.css" afterPath="$PROJECT_DIR$/WikiBreach/static/css/curateGoogleAlerts/curation.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WikiBreach/static/css/curateGoogleAlerts/pwnedCheck.css" afterPath="$PROJECT_DIR$/WikiBreach/static/css/curateGoogleAlerts/pwnedCheck.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WikiBreach/static/css/posts/allPosts.css" afterPath="$PROJECT_DIR$/WikiBreach/static/css/posts/allPosts.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WikiBreach/static/css/posts/post.css" afterPath="$PROJECT_DIR$/WikiBreach/static/css/posts/post.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WikiBreach/static/css/search/search.css" afterPath="$PROJECT_DIR$/WikiBreach/static/css/search/search.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WikiBreach/static/js/base.js" afterPath="$PROJECT_DIR$/WikiBreach/static/js/base.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WikiBreach/static/js/curation.js" afterPath="$PROJECT_DIR$/WikiBreach/static/js/curation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WikiBreach/static/js/pwnedCheck.js" afterPath="$PROJECT_DIR$/WikiBreach/static/js/pwnedCheck.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WikiBreach/templates/base.html" afterPath="$PROJECT_DIR$/WikiBreach/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/forms.py" afterPath="$PROJECT_DIR$/authentication/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/templates/login.html" afterPath="$PROJECT_DIR$/authentication/templates/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/templates/logout.html" afterPath="$PROJECT_DIR$/authentication/templates/logout.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/templates/requireLogin.html" afterPath="$PROJECT_DIR$/authentication/templates/requireLogin.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/templates/signup.html" afterPath="$PROJECT_DIR$/authentication/templates/signup.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/authentication/views.py" afterPath="$PROJECT_DIR$/authentication/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/curateGoogleAlerts/load_data.py" afterPath="$PROJECT_DIR$/curateGoogleAlerts/load_data.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/curateGoogleAlerts/middleware.py" afterPath="$PROJECT_DIR$/curateGoogleAlerts/middleware.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/curateGoogleAlerts/models.py" afterPath="$PROJECT_DIR$/curateGoogleAlerts/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/curateGoogleAlerts/templates/curation.html" afterPath="$PROJECT_DIR$/curateGoogleAlerts/templates/curation.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/curateGoogleAlerts/templates/paginator.html" afterPath="$PROJECT_DIR$/curateGoogleAlerts/templates/paginator.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/curateGoogleAlerts/templates/pwnedCheck.html" afterPath="$PROJECT_DIR$/curateGoogleAlerts/templates/pwnedCheck.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/curateGoogleAlerts/views.py" afterPath="$PROJECT_DIR$/curateGoogleAlerts/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/posts/forms.py" afterPath="$PROJECT_DIR$/posts/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/posts/models.py" afterPath="$PROJECT_DIR$/posts/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/posts/templates/allPosts.html" afterPath="$PROJECT_DIR$/posts/templates/allPosts.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/posts/templates/createPost.html" afterPath="$PROJECT_DIR$/posts/templates/createPost.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/posts/templates/editPost.html" afterPath="$PROJECT_DIR$/posts/templates/editPost.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/posts/templates/post.html" afterPath="$PROJECT_DIR$/posts/templates/post.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/posts/templates/user_submitted_post.html" afterPath="$PROJECT_DIR$/posts/templates/user_submitted_post.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/posts/urls.py" afterPath="$PROJECT_DIR$/posts/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/posts/views.py" afterPath="$PROJECT_DIR$/posts/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search/templates/partial_googleAlert_results.html" afterPath="$PROJECT_DIR$/search/templates/partial_googleAlert_results.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search/templates/partial_privacyRights_results.html" afterPath="$PROJECT_DIR$/search/templates/partial_privacyRights_results.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search/templates/partial_results_menu.html" afterPath="$PROJECT_DIR$/search/templates/partial_results_menu.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search/templates/results.html" afterPath="$PROJECT_DIR$/search/templates/results.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search/templates/search.html" afterPath="$PROJECT_DIR$/search/templates/search.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search/templates/search_paginator.html" afterPath="$PROJECT_DIR$/search/templates/search_paginator.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search/views.py" afterPath="$PROJECT_DIR$/search/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WikiBreach/settings.py" afterPath="$PROJECT_DIR$/WikiBreach/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/send_alerts.py" afterPath="$PROJECT_DIR$/send_alerts.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/subscription/forms.py" afterPath="$PROJECT_DIR$/subscription/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/subscription/models.py" afterPath="$PROJECT_DIR$/subscription/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/subscription/views.py" afterPath="$PROJECT_DIR$/subscription/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -63,30 +19,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/posts/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding>
-                <element signature="e#31#70#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/posts/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding>
-                <element signature="e#31#63#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/posts/views.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -104,6 +36,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WikiBreach/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -163,7 +105,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="send_alerts.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="send_alerts.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/send_alerts.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
@@ -171,6 +113,16 @@
               <folding>
                 <element signature="e#31#82#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/WikiBreach/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -229,7 +181,6 @@
         <option value="$PROJECT_DIR$/WikiBreach/templates/paginator.html" />
         <option value="$PROJECT_DIR$/pwnedCheck/views.py" />
         <option value="$PROJECT_DIR$/curateGoogleAlerts/apps.py" />
-        <option value="$PROJECT_DIR$/WikiBreach/settings.py" />
         <option value="$PROJECT_DIR$/WikiBreach/templates/contactUs.html" />
         <option value="$PROJECT_DIR$/WikiBreach/static/css/base.css" />
         <option value="$PROJECT_DIR$/WikiBreach/static/css/authentication/login.css" />
@@ -275,6 +226,7 @@
         <option value="$PROJECT_DIR$/subscription/models.py" />
         <option value="$PROJECT_DIR$/subscription/views.py" />
         <option value="$PROJECT_DIR$/send_alerts.py" />
+        <option value="$PROJECT_DIR$/WikiBreach/settings.py" />
       </list>
     </option>
   </component>
@@ -718,7 +670,14 @@
       <option name="project" value="LOCAL" />
       <updated>1495048814148</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="cleaned up code, moved js and css out of template files">
+      <created>1495079797001</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1495079797001</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView">
@@ -772,7 +731,8 @@
     <MESSAGE value="Added all files" />
     <MESSAGE value="Fixed pagination in posts&#10;Added delete message in gmail once it is published on WikiBreach" />
     <MESSAGE value="Refactored code to improve code structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored code to improve code structure" />
+    <MESSAGE value="cleaned up code, moved js and css out of template files" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaned up code, moved js and css out of template files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -788,22 +748,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WikiBreach/static/css/authentication/login.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="44" column="17" lean-forward="true" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WikiBreach/static/css/base.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-72">
-          <caret line="116" column="16" lean-forward="false" selection-start-line="116" selection-start-column="13" selection-end-line="116" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WikiBreach/templates/contactUs.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -1025,7 +969,7 @@
         <state relative-caret-position="15">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
-            <element signature="e#31#82#0" expanded="true" />
+            <element signature="e#31#82#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1083,7 +1027,7 @@
         <state relative-caret-position="15">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
-            <element signature="e#31#46#0" expanded="true" />
+            <element signature="e#31#46#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1093,7 +1037,7 @@
         <state relative-caret-position="15">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding>
-            <element signature="e#31#66#0" expanded="true" />
+            <element signature="e#31#66#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1196,6 +1140,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/WikiBreach/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/subscription/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="633">
@@ -1213,6 +1165,14 @@
           <folding>
             <element signature="e#31#82#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WikiBreach/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
