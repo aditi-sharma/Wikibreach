@@ -59,7 +59,7 @@ EMAIL_HOST_PASSWORD = 'summers&company'
 EMAIL_PORT = 587
 
 ADMIN_EMAIL = 'wikibreach2017@gmail.com'
-CONTACT_EMAIL = 'aditisharma.b@gmail.com'
+CONTACT_EMAIL = 'wikibreach2017@gmail.com'
 SITE_URL = 'https://localhost:8000'
 
 MIDDLEWARE = [
