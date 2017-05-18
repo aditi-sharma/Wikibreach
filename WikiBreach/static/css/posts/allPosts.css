@@ -6,8 +6,8 @@ h3 {
     font-weight: 600;
 }
 
-.box {
-  background-color: white;
+div.box{
+  background-color: #fff !important;
   color: black;
   border: 1px solid black;
   padding-left: 20px;
@@ -25,7 +25,6 @@ h3 {
   grid-template-columns: 30% auto 30%;
   grid-column-gap: 45px;
   grid-row-gap: 45px;
-  <!--grid-auto-flow: column;-->
 }
 
 

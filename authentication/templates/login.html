@@ -44,9 +44,7 @@
         </div>
     </div>
 </div>
-{% endblock %}
 
-{% block javascript %}
 
 <script type="text/javascript">
 {% if user.is_authenticated %}
@@ -58,5 +56,4 @@ $(function() {
 $("ul.nav.navbar-nav.navbar-right").css("display","none");
 {% endif %}
 </script>
-
 {% endblock %}
